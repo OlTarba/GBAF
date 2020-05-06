@@ -21,7 +21,7 @@
             <button type="submit">CONNEXION</button>
         </form>
         <br>
-        <p>Pas encore inscrit ? <a href="inscription.php">S'inscrire</a></p>
+        <p>Pas encore inscrit ? <a href="inscription.php" class="link-button">S'inscrire</a></p>
     </div>
 
     <?php include_once 'include/footer.php'; ?>

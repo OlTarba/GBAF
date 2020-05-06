@@ -1,6 +1,8 @@
 <header>
     <div class="container-logo">
-        <img src="img/GBAF.png" alt="Groupe Bancaire Assurance Français" class="logo">
+        <a href="index.php">
+            <img src="img/GBAF.png" alt="Groupe Bancaire Assurance Français" class="logo">
+        </a>
         <!-- <h1 class="gbaf-title">Le Groupement Banque Assurance Français</h1> -->
     </div>
     <div class="container-user">

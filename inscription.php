@@ -36,7 +36,7 @@
             <button type="submit">VALIDER</button>
         </form>
         <br>
-        <p>Vous êtes déjà inscrit ? <a href="connexion.php">Se connecter</a></p>
+        <p>Vous êtes déjà inscrit ? <a href="connexion.php" class="link-button">Se connecter</a></p>
     </div>
 
     <?php include_once 'include/footer.php'; ?>

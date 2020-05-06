@@ -23,9 +23,10 @@
             <div class="content">
                 <h3>DSA FRANCE</h3>
                 <p>
-                    Dsa France accélère la croissance du territoire et s’engage avec les collectivités territoriales.
+                    Dsa France accélère la croissance du territoire et s’engage avec les collectivités territoriales. 
+                    <a href="#" class="personal-link-acteur">DSA-France.fr</a>
                 </p>
-                <p class="link"><a href="#">Lire la suite</a>
+                <p class="link"><a href="acteur.php">Lire la suite</a>
             </div>
         </div>
 

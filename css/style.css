@@ -22,6 +22,12 @@ header{
     justify-content: space-between;
     align-items:center;
 }
+header .container-logo a{
+    transition: opacity 0.3s;
+}
+header .container-logo a:hover{
+    opacity:0.5
+}
 header .logo{
     width: 75px;
     margin-left: 50px;
@@ -100,6 +106,12 @@ header .logo{
 .acteur .content{
     width:60%;
 }
+.personal-link-acteur{
+    color:#FF0000;
+}
+.personal-link-acteur:hover{
+    color:rgba(255, 0, 0, 0.5);
+}
 .acteur .link{
     position:absolute;
     bottom:5px;
@@ -122,7 +134,87 @@ header .logo{
 
 }
 
+/* ACTEUR PAGE */ 
 
+.card .logo-acteur{
+    display:block;
+    margin: 10px auto;
+    border-radius:3px;
+}
+.comment-heading{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    height:75px;
+}
+.comment-heading h5{
+    font-size:30px;
+    text-transform: capitalize;
+    margin-left: 10px;
+}
+.new-comment{
+    color:#333;
+    font-size:15px;
+    text-transform: uppercase;
+    border: 1px solid #333;
+    margin-right: 50px;
+    padding:10px; 
+    border-radius:3px; 
+    text-align:center;
+    font-weight:bold;
+}
+.new-comment:hover{
+    color:#FF0000;
+    border-color:#FF0000;
+}
+.container-button-comment{
+    display:flex;
+}
+.like{
+    display:flex;
+    align-items: center;
+    margin-right:30px;
+}
+.like a{
+    margin-right:5px;
+    transition: opacity 0.3s;
+}
+.like a:hover{
+    opacity:0.5;
+}
+.dislike{
+    display:flex;
+    align-items: center;
+    margin-right:5px;
+}
+.dislike a{
+    margin-right:5px;
+    transition: opacity 0.3s;
+}
+.dislike a:hover{
+    opacity:0.5;
+}
+.comment-like-dislike{
+    width:20px;
+
+}
+.comment{
+    background:#DDD;
+    padding:1px 20px;
+    border-radius:3px; 
+}
+.comment-name{
+    font-size: 18px; 
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.comment-date{
+    font-size:12px;
+    opacity:0.7;
+}
+.comment-message{
+    font-size:16px;
+}
 
 /* FORM */
 
@@ -173,13 +265,13 @@ header .logo{
     font-weight: bold;
     text-align:center;
 }
-.form a{
+.link-button{
     color:#FF0000;
     padding:6px;
     transition: 0.3s;
     border-radius:3px;
 }
-.form a:hover{
+.link-button:hover{
     background-color:#FF0000;
     color:#FFF;
 }
