@@ -7,7 +7,7 @@
 <body>
     <?php include_once 'include/header.php'; ?>
 
-    <div class="card form">
+    <div class="card-form form">
         <form action="">
             <div>
                 <label for="nom">Nom <span class="required">*</span>  : </label>

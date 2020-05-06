@@ -16,15 +16,15 @@ a:hover{
 }
 
 /* HEADER */ 
-
+header{
+    border-bottom: 2px solid #FF0000;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+}
 header .logo{
     width: 75px;
-    margin: 10px 0px;
     margin-left: 50px;
-    float:left;
-}
-header{
-    border-bottom: 1px solid #333;
 }
 .gbaf-title{
     font-weight: 100;
@@ -33,10 +33,35 @@ header{
     margin-left: 50px;
     padding:20px;
 }
+.container-user a{
+    display:flex;
+    color:#333;
+    transition: opacity 0.3s;
+}
+.container-user a:hover{
+    opacity:0.5;
+}
+.user-picture{
+    width:25px;
+    margin-right: 10px;
+}
+.user-info{
+    margin-right:50px; 
+}
+/* DESCRIPTION */ 
+.description{
+    color:#FFF;
+    width:100%;
+    min-height:200px;
+    padding: 20px 20px;
+    border-bottom: 2px solid #AAA;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.4)),
+                 center url('../img/illustration.jpg');
+}
 
 /* CARD */ 
 
-.card{
+.card-form{
     background-color:#EEE;
     box-shadow: 0px 0px 7px rgba(0,0,0,0.5);
     padding: 20px;
@@ -44,6 +69,63 @@ header{
     border-radius:3px;
     margin: 125px auto;
 }
+.card{
+    background-color:#EEE;
+    box-shadow: 0px 0px 7px rgba(0,0,0,0.5);
+    padding: 10px;
+    width: 80vw;
+    border-radius:3px;
+    margin: 125px auto;
+}
+
+/* ACTEUR ACCUEIL */
+
+.acteur{
+    display:flex;
+    background-color: #DDD;
+    padding:10px;
+    border-radius:3px;
+    margin: 10px;
+    position:relative;
+}
+.acteur img{
+    width:20%;
+    margin-right: 10px;
+    border-radius: 3px;
+}
+.acteur h3{
+    color:#333;
+    text-transform: uppercase;
+}
+.acteur .content{
+    width:60%;
+}
+.acteur .link{
+    position:absolute;
+    bottom:5px;
+    right:10px;
+}
+.acteur .link a{
+    border : 2px solid #333;
+    padding:7px;
+    border-radius:3px; 
+    color:#333;
+    font-weight:bold;
+    transition: 0.3s;
+    font-size:12px;
+}
+.acteur .link a:hover{
+    background-color: #FF0000;
+    border-color: #FF0000;
+    color:#FFF;
+    font-weight: bold;
+
+}
+
+
+
+/* FORM */
+
 .form div{
     display:flex;
     justify-content: space-between;
@@ -105,12 +187,9 @@ header{
 /* FOOTER */ 
 
 footer{
+    border-top: 2px solid #AAA;
     background-color:#FF0000; 
     color:#FFF;
-    position:absolute;
-    bottom:0px;
-    left:0px;
-    right:0px;
     text-align:center;
-    margin:0;
+    padding:7px;
 }
