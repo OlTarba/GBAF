@@ -1,0 +1,116 @@
+/* GENERAL */ 
+*{
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+}
+body{
+    margin:0;
+}
+a{
+    text-decoration:none;
+    color:#FFF;
+    transition:color 0.3s;
+}
+a:hover{
+    color:rgba(255, 255, 255, 0.5);
+}
+
+/* HEADER */ 
+
+header .logo{
+    width: 75px;
+    margin: 10px 0px;
+    margin-left: 50px;
+    float:left;
+}
+header{
+    border-bottom: 1px solid #333;
+}
+.gbaf-title{
+    font-weight: 100;
+    font-size: 30px; 
+    display:inline-block;
+    margin-left: 50px;
+    padding:20px;
+}
+
+/* CARD */ 
+
+.card{
+    background-color:#EEE;
+    box-shadow: 0px 0px 7px rgba(0,0,0,0.5);
+    padding: 20px;
+    width: 40vw;
+    border-radius:3px;
+    margin: 125px auto;
+}
+.form div{
+    display:flex;
+    justify-content: space-between;
+    margin-bottom:10px;
+}
+.form label{
+    margin-top:5px;
+    font-size:20px;
+}
+.required{
+    color:#FF0000;
+    font-weight:bold;
+}
+.form input{
+    height:40px;
+    font-size:18px;
+    border: 2px solid #333;
+    border-radius:3px;
+    transition: 0.3s;
+    padding-left:5px;
+}
+.form input:focus{
+    border-color: rgb(211, 211, 211);
+    outline: none;
+}
+.form button{
+    display:block;
+    margin:0 auto;
+    margin-top:40px;
+    background-color:transparent;
+    color:#333;
+    border-radius: 3px;
+    border: 2px solid #333;
+    padding: 10px;
+    font-weight:bold;
+    transition: 0.3s;
+}
+.form button:hover{
+    background-color: #FF0000;
+    border-color:#FF0000;
+    color:#FFF;
+    cursor: pointer;
+}
+.form p{
+    font-weight: bold;
+    text-align:center;
+}
+.form a{
+    color:#FF0000;
+    padding:6px;
+    transition: 0.3s;
+    border-radius:3px;
+}
+.form a:hover{
+    background-color:#FF0000;
+    color:#FFF;
+}
+
+/* FOOTER */ 
+
+footer{
+    background-color:#FF0000; 
+    color:#FFF;
+    position:absolute;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    text-align:center;
+    margin:0;
+}
