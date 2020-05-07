@@ -203,6 +203,9 @@ header .logo{
 .dislike a:hover{
     opacity:0.5;
 }
+.voted a:hover{
+    opacity:1!important;
+}
 .comment-like-dislike{
     width:20px;
 
