@@ -30,7 +30,7 @@ header .container-logo a:hover{
 }
 header .logo{
     width: 75px;
-    margin-left: 50px;
+    margin-left: 150px;
 }
 .gbaf-title{
     font-weight: 100;
@@ -52,7 +52,7 @@ header .logo{
     margin-right: 10px;
 }
 .user-info{
-    margin-right:50px; 
+    margin-right:150px; 
 }
 /* DESCRIPTION */ 
 .description{
@@ -70,10 +70,15 @@ header .logo{
 .card-form{
     background-color:#EEE;
     box-shadow: 0px 0px 7px rgba(0,0,0,0.5);
-    padding: 20px;
+    padding: 10px;
     width: 40vw;
     border-radius:3px;
-    margin: 125px auto;
+}
+.connexion{
+    margin: 20.3vh auto;
+}
+.inscription{
+    margin:8.9vh auto;
 }
 .card{
     background-color:#EEE;
@@ -202,6 +207,7 @@ header .logo{
     background:#DDD;
     padding:1px 20px;
     border-radius:3px; 
+    margin:10px 0;
 }
 .comment-name{
     font-size: 18px; 
@@ -223,6 +229,13 @@ header .logo{
     justify-content: space-between;
     margin-bottom:10px;
 }
+.form h3{
+    color:#FF0000; 
+    font-weight:200; 
+    font-size:35px;
+    text-align:center;
+    margin-top:0;
+}
 .form label{
     margin-top:5px;
     font-size:20px;
@@ -238,6 +251,7 @@ header .logo{
     border-radius:3px;
     transition: 0.3s;
     padding-left:5px;
+    width:50%;
 }
 .form input:focus{
     border-color: rgb(211, 211, 211);

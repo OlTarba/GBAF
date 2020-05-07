@@ -7,7 +7,8 @@
 <body>
     <?php include_once 'include/header.php'; ?>
 
-    <div class="card-form form">
+    <div class="card-form form connexion">
+        <h3>Connexion</h3>
         <form action="">
             <div>
                 <label for="pseudo">Pseudonyme : </label>

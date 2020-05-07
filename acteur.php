@@ -21,7 +21,7 @@
 
     <div class="card">
         <div class="comment-heading">
-            <h5>1 commentaires</h5>
+            <h5>2 commentaires</h5>
             <div class="container-button-comment">
                 <a href="#" class="new-comment">Nouveau <br> commentaire</a>
                 <div class="like">
@@ -38,6 +38,11 @@
             <p class="comment-name">Thibault</p>
             <p class="comment-date">06/05/2020</p>
             <p class="comment-message">Sympathique votre organisme, je like direct wesh !</p>
+        </div>
+        <div class="comment">
+            <p class="comment-name">Angélique</p>
+            <p class="comment-date">07/05/2020</p>
+            <p class="comment-message">Woaw ! T'avance super vite !</p>
         </div>
     </div>
 
