@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 07 mai 2020 à 11:28
+-- Généré le : jeu. 07 mai 2020 à 16:12
 -- Version du serveur :  10.4.11-MariaDB
--- Version de PHP : 7.4.4
+-- Version de PHP : 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -42,7 +43,9 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`id_user`, `nom`, `prenom`, `username`, `password`, `question`, `reponse`) VALUES
-(7, 'Berthelin', 'Thibault', 'OlTarba', 'tbjdaa94a8fe5ccb19ba61c4c0873d391e987982fbbd37a96', 'Comment s\'appelle mon chat ?', 'acvpa09fb41208731a2457f95b805c17982c8df575f37m20');
+(7, 'Berthelin', 'Thibault', 'OlTarba', 'tbjdaa94a8fe5ccb19ba61c4c0873d391e987982fbbd37a96', 'Comment s\'appelle mon chat ?', 'acvpa09fb41208731a2457f95b805c17982c8df575f37m20'),
+(8, 'Carpentier', 'Angélique', 'larpentier', 'tbjdaa94a8fe5ccb19ba61c4c0873d391e987982fbbd37a96', 'Comment s\'appelle la grosse ?', 'acvpca70918e5246bc91b47ecb4ec585293c593c64127m20'),
+(9, 'Shakur', 'Tupac', 'Makaveli', 'tbjdaa94a8fe5ccb19ba61c4c0873d391e987982fbbd37a96', 'dsqdsq', 'acvpa16358be6e2306b153b1f071477e68837266075e7m20');
 
 -- --------------------------------------------------------
 
@@ -81,6 +84,19 @@ CREATE TABLE `post` (
   `post` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `post`
+--
+
+INSERT INTO `post` (`id_post`, `id_user`, `id_acteur`, `date_add`, `post`) VALUES
+(1, 7, 1, '2020-05-07 13:45:06', 'Petit test de commentaire'),
+(3, 8, 1, '2020-05-07 14:35:19', 'Hey ! Ca a l\'air de marché ton système ! \r\nDis donc !'),
+(4, 8, 2, '2020-05-07 15:07:18', 'Petit test des familles pour bien voir si le système de commentaire fonctionne bien !'),
+(5, 7, 2, '2020-05-07 15:08:55', 'Encore un test pour voir si ça marche bien, même si ça bug un peu encore'),
+(6, 8, 4, '2020-05-07 15:14:21', 'Encore un test, mais cette fois ci ça me semble bon !'),
+(7, 7, 4, '2020-05-07 15:18:38', 'C\'EST BON ! C\'est régler ! Enfin j\'espère'),
+(8, 9, 2, '2020-05-07 15:20:17', 'A\'yo les bro ! Put your hands up nigga !');
+
 -- --------------------------------------------------------
 
 --
@@ -92,6 +108,23 @@ CREATE TABLE `vote` (
   `id_acteur` int(11) NOT NULL,
   `vote` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `vote`
+--
+
+INSERT INTO `vote` (`id_user`, `id_acteur`, `vote`) VALUES
+(9, 1, 1),
+(9, 2, 2),
+(9, 3, 1),
+(8, 1, 1),
+(8, 2, 2),
+(8, 3, 2),
+(8, 4, 1),
+(7, 1, 2),
+(7, 2, 2),
+(7, 3, 1),
+(7, 4, 2);
 
 --
 -- Index pour les tables déchargées
@@ -132,7 +165,7 @@ ALTER TABLE `vote`
 -- AUTO_INCREMENT pour la table `account`
 --
 ALTER TABLE `account`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT pour la table `acteur`
@@ -144,7 +177,7 @@ ALTER TABLE `acteur`
 -- AUTO_INCREMENT pour la table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Contraintes pour les tables déchargées
