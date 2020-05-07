@@ -46,7 +46,7 @@
     <body>
         <?php include_once 'include/header.php'; ?>
 
-        <div class="card-form form connexion">
+        <div class="card-form form">
             <h3>Connexion</h3>
             <form action="" method="POST">
                 <div>

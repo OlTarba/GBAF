@@ -14,6 +14,11 @@ a{
 a:hover{
     color:rgba(255, 255, 255, 0.5);
 }
+textarea{
+    min-height:150px!important;
+    max-width:80%;
+    min-width:80%;
+}
 /* HEADER */ 
 header{
     border-bottom: 2px solid #FF0000;
@@ -25,7 +30,7 @@ header .container-logo a{
     transition: opacity 0.3s;
 }
 header .container-logo a:hover{
-    opacity:0.5
+    opacity:0.7
 }
 header .logo{
     width: 75px;
@@ -44,7 +49,7 @@ header .logo{
     transition: opacity 0.3s;
 }
 .container-user a:hover{
-    opacity:0.5;
+    opacity:0.7;
 }
 .user-picture{
     width:25px;
@@ -72,13 +77,10 @@ header .logo{
     padding: 10px;
     width: 40vw;
     border-radius:3px;
+    margin: 0px auto;
+    margin-top: 5vh;
 }
-.connexion{
-    margin: 20.3vh auto;
-}
-.inscription{
-    margin:8.9vh auto;
-}
+
 .card{
     background-color:#EEE;
     box-shadow: 0px 0px 7px rgba(0,0,0,0.5);
@@ -86,6 +88,9 @@ header .logo{
     width: 80vw;
     border-radius:3px;
     margin: 125px auto;
+}
+.add-comment{
+    width:50vw;
 }
 
 /* ACTEUR ACCUEIL */
@@ -114,7 +119,7 @@ header .logo{
     color:#FF0000;
 }
 .personal-link-acteur:hover{
-    color:rgba(255, 0, 0, 0.5);
+    color:rgba(255, 0, 0, 0.7);
 }
 .acteur .link{
     position:absolute;
@@ -244,17 +249,17 @@ header .logo{
     color:#FF0000;
     font-weight:bold;
 }
-.form input{
+.form input, .form textarea{
     height:40px;
     font-size:18px;
     border: 2px solid #333;
     border-radius:3px;
-    transition: 0.3s;
+    transition: border 0.3s;
     padding-left:5px;
     width:50%;
 }
-.form input:focus{
-    border-color: rgb(211, 211, 211);
+.form input:focus, .form textarea:focus{
+    border-color: #bdbdbd;
     outline: none;
 }
 .form button{

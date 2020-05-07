@@ -51,7 +51,7 @@
     <body>
         <?php include_once 'include/header.php'; ?>
 
-        <div class="card-form form inscription">
+        <div class="card-form form">
             <h3>Inscription</h3>
             <form action="" method="POST">
                 <div>

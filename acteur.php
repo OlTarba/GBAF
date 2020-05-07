@@ -12,9 +12,28 @@
 
     $reqActeurPage = $db->prepare('SELECT * FROM acteur WHERE id_acteur = ?');
     $reqActeurPage->execute([$id]);
-
     $acteur = $reqActeurPage->fetch();
 
+    $reqPost = $db->prepare('SELECT * FROM post INNER JOIN account ON post.id_user = account.id_user WHERE post.id_acteur ');
+    $reqPost->execute([$id]);
+
+    // debug($reqPost->fetch());
+
+
+    $reqPostCount = $db->prepare('SELECT COUNT(*) AS postCount FROM post WHERE id_acteur = ?');
+    $reqPostCount->execute([$id]);
+    $postCount = $reqPostCount->fetch();
+
+    $reqPostUser = $db->prepare('SELECT COUNT(*) AS postUserCount FROM post WHERE id_acteur = ? AND id_user = ?');
+    $reqPostUser->execute([$id, $_SESSION['id']]);
+
+    $postUserCount = $reqPostUser->fetch();
+
+    $buttonNewComment = '';
+
+    if($postCount['postCount'] == 0 || $postUserCount['postUserCount'] == 0){
+        $buttonNewComment = '<a href="add-comment.php?id='.$id.'" class="new-comment">Nouveau <br> commentaire</a>';
+    }
 ?>
 
 <!DOCTYPE html>
@@ -37,9 +56,9 @@
 
     <div class="card">
         <div class="comment-heading">
-            <h5>2 commentaires</h5>
+            <h5><?= $postCount['postCount'] ?> commentaires</h5>
             <div class="container-button-comment">
-                <a href="#" class="new-comment">Nouveau <br> commentaire</a>
+                <?= $buttonNewComment ?>
                 <div class="like">
                     <a href=""><img src="img/like.svg" class="comment-like-dislike" alt="Like"></a>
                     5
@@ -50,16 +69,15 @@
                 </div>
             </div>
         </div>
-        <div class="comment">
-            <p class="comment-name">Thibault</p>
-            <p class="comment-date">06/05/2020</p>
-            <p class="comment-message">Sympathique votre organisme, je like direct wesh !</p>
-        </div>
-        <div class="comment">
-            <p class="comment-name">Angélique</p>
-            <p class="comment-date">07/05/2020</p>
-            <p class="comment-message">Woaw ! T'avance super vite !</p>
-        </div>
+        <?php while($post = $reqPost->fetch()){ 
+            if($post['id_acteur'] === $id){ ?>
+            <div class="comment">
+                <p class="comment-name"><?= $post['prenom'] ?> <?= $post['nom'] ?></p>
+                <p class="comment-date"><?= substr($post['date_add'], 0, 16) ?></p>
+                <p class="comment-message"><?= $post['post'] ?></p>
+            </div>
+        <?php }
+        } ?> 
     </div>
 
     <?php include_once 'include/footer.php'; ?>    
