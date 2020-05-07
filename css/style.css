@@ -235,6 +235,7 @@ header .logo{
     font-size:35px;
     text-align:center;
     margin-top:0;
+    text-transform:uppercase;
 }
 .form label{
     margin-top:5px;
@@ -298,4 +299,10 @@ footer{
     color:#FFF;
     text-align:center;
     padding:7px;
+}
+.fixed-footer{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
 }
