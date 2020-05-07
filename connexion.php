@@ -1,3 +1,42 @@
+<?php 
+    session_start();
+
+    if(isset($_SESSION['connect'])){
+        header('Location: index.php');
+    }
+
+    require_once 'include/database.php';
+    require_once 'include/functions.php';
+
+    if(!empty($_POST['pseudo']) && !empty($_POST['password'])){
+        $pseudo     = str_secur($_POST['pseudo']);
+        $password   = str_secur($_POST['password']);
+
+        $password = "tbjda".sha1($password)."7a96";
+
+        $reqUsername = $db->prepare('SELECT * FROM account WHERE username = ?');
+        $reqUsername->execute([$pseudo]);
+
+        while($username = $reqUsername->fetch()){
+            if($password === $username['password']){
+                $_SESSION['id']             = $username['id_user'];
+                $_SESSION['nom']            = $username['nom'];
+                $_SESSION['prenom']         = $username['prenom'];
+                $_SESSION['connect']        = 1;
+
+                header('Location: index.php');
+                exit;            
+            }else{
+                header('Location: connexion.php?error=1&message=Mot de passe incorrect');
+                exit;
+            }
+        }
+
+        header('Location: connexion.php?error=1&message=Pseudonyme incorrect');
+    }   
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -9,7 +48,7 @@
 
         <div class="card-form form connexion">
             <h3>Connexion</h3>
-            <form action="">
+            <form action="" method="POST">
                 <div>
                     <label for="pseudo">Pseudonyme : </label>
                     <input type="text" required name="pseudo">
@@ -23,6 +62,13 @@
             </form>
             <br>
             <p>Pas encore inscrit ? <a href="inscription.php" class="link-button">S'inscrire</a></p>
+            <p><a href="#" class="link-button">Mot de passe oublié ?</a></p>
+            <br>
+            <?php if(isset($_GET['error'])){ ?>
+                <p class="error"><?= $_GET['message'] ?></p>
+            <?php }else if(isset($_GET['success'])){ ?>
+                <p class="success"><?= $_GET['message'] ?></p>
+            <?php } ?>
         </div>
 
         <div class="fixed-footer">

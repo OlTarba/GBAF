@@ -1,21 +1,37 @@
+<?php  
+    session_start();
+    
+    require_once 'include/database.php';
+    require_once 'include/functions.php';
+
+    if(!isset($_SESSION['connect'])){
+        header('Location: connexion.php');
+    }
+
+    $id = str_secur($_GET['id']);
+
+    $reqActeurPage = $db->prepare('SELECT * FROM acteur WHERE id_acteur = ?');
+    $reqActeurPage->execute([$id]);
+
+    $acteur = $reqActeurPage->fetch();
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <?php require_once 'include/head.php'; ?>
-    <title>GBAF | Acteur</title>
+    <title>GBAF | <?= $acteur['acteur'] ?></title>
 </head>
 <body>
     <?php include_once 'include/header.php'; ?>
 
     <div class="card">
-        <img src="img/Dsa_france.png" class="logo-acteur" alt="DSA France">
-        <h2>DSA France</h2>
-        <p><a href="#" class="personal-link-acteur">DSA-France.fr</a></p>
+        <img src="img/<?= $acteur['logo'] ?>" class="logo-acteur" alt="<?= $acteur['acteur'] ?>">
+        <h2><?= $acteur['acteur'] ?></h2>
+        <p><a href="#" class="personal-link-acteur"><?= $acteur['acteur'] ?>.fr</a></p>
         <p class="text-content">
-            Dsa France accélère la croissance du territoire et s’engage avec les collectivités territoriales. <br>
-            Nous accompagnons les entreprises dans les étapes clés de leur évolution. <br>
-            Notre philosophie : s’adapter à chaque entreprise. <br>
-            Nous les accompagnons pour voir plus grand et plus loin et proposons des solutions de financement adaptées à chaque étape de la vie des entreprises <br>
+            <?= $acteur['description'] ?>        
         </p>
     </div>
 

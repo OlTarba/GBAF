@@ -1,3 +1,18 @@
+<?php 
+    session_start();
+
+    require_once 'include/database.php';
+
+    if(!isset($_SESSION['connect'])){
+        header('Location: connexion.php');
+    }
+
+    $reqActeur = $db->prepare('SELECT * FROM acteur');
+    $reqActeur->execute([]);
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -18,50 +33,21 @@
     </div>
 
     <div class="card">
-        <div class="acteur">
-            <img src="img/Dsa_france.png" alt="DSA France">
-            <div class="content">
-                <h3>DSA FRANCE</h3>
-                <p>
-                    Dsa France accélère la croissance du territoire et s’engage avec les collectivités territoriales. 
-                    <a href="#" class="personal-link-acteur">DSA-France.fr</a>
-                </p>
-                <p class="link"><a href="acteur.php">Lire la suite</a>
+        <?php while($acteur = $reqActeur->fetch()){ ?>
+            <div class="acteur">
+                <img src="img/<?= $acteur['logo'] ?>" alt="<?= $acteur['acteur'] ?>">
+                <div class="content">
+                    <h3><?= $acteur['acteur'] ?></h3>
+                    <p>
+                        <?= substr($acteur['description'], 0, 150).'...' ?>
+                        <a href="#" class="personal-link-acteur"><?= $acteur['acteur'] ?>.fr</a>
+                    </p>
+                    <p class="link"><a href="acteur.php?id=<?= $acteur['id_acteur'] ?>">Lire la suite</a>
+                </div>
             </div>
-        </div>
-
-        <div class="acteur">
-            <img src="img/formation_co.png" alt="Formation & Co">
-            <div class="content">
-                <h3>Formation & Co</h3>
-                <p>
-                Formation&co est une association française présente sur tout le territoire.
-                </p>
-                <p class="link"><a href="#">Lire la suite</a>
-            </div>
-        </div>
-
-        <div class="acteur">
-            <img src="img/CDE.png" alt="CDE">
-            <div class="content">
-                <h3>Chambre Des Entrepreneurs</h3>
-                <p>
-                La CDE (Chambre Des Entrepreneurs) accompagne les entreprises dans leurs démarches de formation.                 </p>
-                <p class="link"><a href="#">Lire la suite</a>
-            </div>
-        </div>
-
-        <div class="acteur">
-            <img src="img/protectpeople.png" alt="Protect People">
-            <div class="content">
-                <h3>Protect People</h3>
-                <p>
-                Protectpeople finance la solidarité nationale.
-Nous appliquons le principe édifié par la Sécurité sociale française en 1945 : permettre à chacun de bénéficier d’une protection sociale.                </p>
-                <p class="link"><a href="#">Lire la suite</a>
-            </div>
-        </div>
+        <?php } ?>
     </div>
+
 
 
 
