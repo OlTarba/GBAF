@@ -1,11 +1,11 @@
 <?php 
     session_start();
 
-    require_once 'include/database.php';
-    require_once 'include/functions.php';
+    require_once '../include/database.php';
+    require_once '../include/functions.php';
 
     if(isset($_GET['connect'])){
-        header('Location: index.php');
+        header('Location: ../index.php');
         exit;
     }
 
@@ -41,7 +41,7 @@
                 $reqUpdatePass = $db->prepare('UPDATE account set password = ? WHERE id_user = ?');
                 $reqUpdatePass->execute([$password, $user['id_user']]);
 
-                header('Location: connexion.php?success=1&message=Votre mot de passe à bien été modifier.');
+                header('Location: ../connexion.php?success=1&message=Votre mot de passe à bien été modifier.');
                 exit;
             
             }else{
@@ -102,7 +102,7 @@
             </div>
         <?php } ?>    
         <div class="fixed-footer">
-            <?php include_once 'include/footer.php'; ?> 
+            <?php include_once '../include/footer.php'; ?> 
         </div>
     </body>
 </html>

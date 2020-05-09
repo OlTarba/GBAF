@@ -2,7 +2,7 @@
     session_start();
 
     if(!isset($_SESSION['connect'])){
-        header('Location: connexion.php');
+        header('Location: ../connexion.php');
         exit;
     }
 ?>
@@ -23,7 +23,7 @@
         </div>
 
         <div class="fixed-footer">
-            <?php include_once 'include/footer.php'; ?>
+            <?php include_once '../include/footer.php'; ?>
         </div>
     </body>
 </html>

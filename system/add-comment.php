@@ -1,11 +1,11 @@
 <?php 
     session_start();
 
-    require_once 'include/database.php';
-    require_once 'include/functions.php';
+    require_once '../include/database.php';
+    require_once '../include/functions.php';
 
     if(!isset($_SESSION['connect'])){
-        header('Location: connexion.php');
+        header('Location: ../connexion.php');
     }
 
     $id = str_secur($_GET['id']);
@@ -21,7 +21,7 @@
         $reqInsertComment = $db->prepare('INSERT INTO post(id_user, id_acteur, post) VALUES(?, ?, ?)');
         $reqInsertComment->execute([$_SESSION['id'], $id, $comment]);
 
-        header('Location: acteur.php?id='.$id);
+        header('Location: ../acteur.php?id='.$id);
         exit;
     }
     
@@ -48,7 +48,7 @@
         </div>
 
         <div class="fixed-footer">
-            <?php include_once 'include/footer.php'; ?>
+            <?php include_once '../include/footer.php'; ?>
         </div>
     </body>
 </html>

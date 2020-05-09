@@ -62,7 +62,7 @@
             </form>
             <br>
             <p>Pas encore inscrit ? <a href="inscription.php" class="link-button">S'inscrire</a></p>
-            <p><a href="forgot.php" class="link-button">Mot de passe oublié ?</a></p>
+            <p><a href="system/forgot.php" class="link-button">Mot de passe oublié ?</a></p>
             <br>
             <?php if(isset($_GET['error'])){ ?>
                 <p class="error"><?= $_GET['message'] ?></p>

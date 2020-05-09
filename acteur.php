@@ -15,7 +15,7 @@
     $acteur = $reqActeurPage->fetch();
 
     if($acteur === false){
-        header('Location: error.php');
+        header('Location: system/error.php');
     }
 
     $reqPost = $db->prepare('SELECT * FROM post INNER JOIN account ON post.id_user = account.id_user WHERE post.id_acteur ');
@@ -33,7 +33,7 @@
     $buttonNewComment = '';
 
     if($postCount['postCount'] == 0 || $postUserCount['postUserCount'] == 0){
-        $buttonNewComment = '<a href="add-comment.php?id='.$id.'" class="new-comment">Nouveau <br> commentaire</a>';
+        $buttonNewComment = '<a href="system/add-comment.php?id='.$id.'" class="new-comment">Nouveau <br> commentaire</a>';
     }
 
     $reqLike = $db->prepare('SELECT COUNT(*) AS countLike FROM vote WHERE id_acteur = ? AND vote = ?');
@@ -74,11 +74,11 @@
                 <?= $buttonNewComment ?>
                 <?php if($voted['countVote'] == 0){ ?>
                     <div class="like">
-                        <a href="like-system.php?value=1&id=<?= $id ?>"><img src="img/like.svg" class="comment-like-dislike" alt="Like"></a>
+                        <a href="system/like-system.php?value=1&id=<?= $id ?>"><img src="img/like.svg" class="comment-like-dislike" alt="Like"></a>
                         <?= $like['countLike'] ?>
                     </div>
                     <div class="dislike">
-                        <a href="like-system.php?value=2&id=<?= $id ?>"><img src="img/dislike.svg" class="comment-like-dislike" alt="Dislike"></a>
+                        <a href="system/like-system.php?value=2&id=<?= $id ?>"><img src="img/dislike.svg" class="comment-like-dislike" alt="Dislike"></a>
                         <?= $dislike['countDislike'] ?>
                     </div>
                 <?php }else {  ?>
