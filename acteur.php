@@ -14,6 +14,10 @@
     $reqActeurPage->execute([$id]);
     $acteur = $reqActeurPage->fetch();
 
+    if($acteur === false){
+        header('Location: error.php');
+    }
+
     $reqPost = $db->prepare('SELECT * FROM post INNER JOIN account ON post.id_user = account.id_user WHERE post.id_acteur ');
     $reqPost->execute([$id]);
 

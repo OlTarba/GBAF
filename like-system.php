@@ -12,10 +12,10 @@
     $id     = str_secur($_GET['id']);
     $value  = str_secur($_GET['value']);
 
-    // if($value < 3 && 0 > $value){
+    if($value < 3 && $value > 0){
         $insertValue = $db->prepare('INSERT INTO vote(id_user, id_acteur, vote) VALUES(?, ?, ?)');
         $insertValue->execute([$_SESSION['id'], $id, $value]);
 
         header('Location: acteur.php?id='.$id);
         exit;
-    // }
+    }
