@@ -10,7 +10,7 @@
                 <img src="../img/disconnect.svg" class="user-picture" alt="">
                 <p>Deconnexion</p>
             </a>
-            <a href="#">
+            <a href="system/user_settings.php">
                 <img src="../img/social.svg" alt="user" class="user-picture"> 
                 <p class="user-info"><?= $_SESSION['nom'] ?> <?= $_SESSION['prenom'] ?></p>
             </a>

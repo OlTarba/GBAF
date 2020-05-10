@@ -33,7 +33,7 @@
     $buttonNewComment = '';
 
     if($postCount['postCount'] == 0 || $postUserCount['postUserCount'] == 0){
-        $buttonNewComment = '<a href="system/add-comment.php?id='.$id.'" class="new-comment">Nouveau <br> commentaire</a>';
+        $buttonNewComment = '<a href="system/add_comment.php?id='.$id.'" class="new-comment">Nouveau <br> commentaire</a>';
     }
 
     $reqLike = $db->prepare('SELECT COUNT(*) AS countLike FROM vote WHERE id_acteur = ? AND vote = ?');
@@ -74,11 +74,11 @@
                 <?= $buttonNewComment ?>
                 <?php if($voted['countVote'] == 0){ ?>
                     <div class="like">
-                        <a href="system/like-system.php?value=1&id=<?= $id ?>"><img src="img/like.svg" class="comment-like-dislike" alt="Like"></a>
+                        <a href="system/like_system.php?value=1&id=<?= $id ?>"><img src="img/like.svg" class="comment-like-dislike" alt="Like"></a>
                         <?= $like['countLike'] ?>
                     </div>
                     <div class="dislike">
-                        <a href="system/like-system.php?value=2&id=<?= $id ?>"><img src="img/dislike.svg" class="comment-like-dislike" alt="Dislike"></a>
+                        <a href="system/like_system.php?value=2&id=<?= $id ?>"><img src="img/dislike.svg" class="comment-like-dislike" alt="Dislike"></a>
                         <?= $dislike['countDislike'] ?>
                     </div>
                 <?php }else {  ?>
@@ -96,7 +96,7 @@
         <?php while($post = $reqPost->fetch()){ 
             if($post['id_acteur'] === $id){ ?>
             <div class="comment">
-                <p class="comment-name"><?= $post['prenom'] ?> <?= $post['nom'] ?></p>
+                <p class="comment-name"><?= $post['prenom'].' '.$post['nom'] ?></p>
                 <p class="comment-date"><?= substr($post['date_add'], 0, 16) ?></p>
                 <p class="comment-message"><?= $post['post'] ?></p>
             </div>

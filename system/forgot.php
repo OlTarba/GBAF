@@ -57,11 +57,11 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <?php require_once 'include/head.php'; ?>
+        <?php require_once 'include_system/head.php'; ?>
         <title>GBAF | Mot de passe oublié</title>
     </head>
     <body>
-        <?php include_once 'include/header.php'; ?>
+        <?php include_once 'include_system/header.php'; ?>
 
         <?php if(!isset($_GET['question'])){ ?>
             <div class="card-form form">
