@@ -86,11 +86,11 @@
                     </div>
                 <?php }else {  ?>
                     <div class="like voted">
-                        <a><img src="/GBAF/img/like.svg" class="comment-like-dislike" alt="Like"></a>
+                        <a><img src="/GBAF/img/like_voted.svg" class="comment-like-dislike" alt="Like"></a>
                         <?= $like['countLike'] ?>
                     </div>
                     <div class="dislike voted">
-                        <a><img src="/GBAF/img/dislike.svg" class="comment-like-dislike" alt="Dislike"></a>
+                        <a><img src="/GBAF/img/dislike_voted.svg" class="comment-like-dislike" alt="Dislike"></a>
                         <?= $dislike['countDislike'] ?>
                     </div>
                 <?php } ?>

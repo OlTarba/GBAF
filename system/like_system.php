@@ -12,6 +12,15 @@
     $id     = str_secur($_GET['id']);
     $value  = str_secur($_GET['value']);
 
+    $reqUserVote = $db->prepare('SELECT COUNT(*) AS countVote FROM vote WHERE id_acteur = ? AND id_user = ?');
+    $reqUserVote->execute([$id, $_SESSION['id']]);
+    $voted = $reqUserVote->fetch();
+
+    if($voted['countVote'] != 0){
+        header('Location: /GBAF/acteur.php?id='.$id.'#comments');
+        exit;
+    }
+
     if($value < 3 && $value > 0){
         $insertValue = $db->prepare('INSERT INTO vote(id_user, id_acteur, vote) VALUES(?, ?, ?)');
         $insertValue->execute([$_SESSION['id'], $id, $value]);
