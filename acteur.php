@@ -24,6 +24,9 @@
     $reqPostCount = $db->prepare('SELECT COUNT(*) AS postCount FROM post WHERE id_acteur = ?');
     $reqPostCount->execute([$id]);
     $postCount = $reqPostCount->fetch();
+    
+    $postCount['postCount'] > 1 ? $commentaires = "Commentaires" : $commentaires = "Commentaire";
+
 
     $reqPostUser = $db->prepare('SELECT COUNT(*) AS postUserCount FROM post WHERE id_acteur = ? AND id_user = ?');
     $reqPostUser->execute([$id, $_SESSION['id']]);
@@ -68,8 +71,8 @@
     </div>
 
     <div class="card">
-        <div class="comment-heading">
-            <h5><?= $postCount['postCount'] ?> commentaires</h5>
+        <div class="comment-heading" id="comments">
+            <h5><?= $postCount['postCount'] ?> <?= $commentaires ?></h5>
             <div class="container-button-comment">
                 <?= $buttonNewComment ?>
                 <?php if($voted['countVote'] == 0){ ?>

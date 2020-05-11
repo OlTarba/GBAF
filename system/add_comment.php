@@ -21,7 +21,7 @@
         $reqInsertComment = $db->prepare('INSERT INTO post(id_user, id_acteur, post) VALUES(?, ?, ?)');
         $reqInsertComment->execute([$_SESSION['id'], $id, $comment]);
 
-        header('Location: ../acteur.php?id='.$id);
+        header('Location: ../acteur.php?id='.$id.'#comments');
         exit;
     }
     
@@ -44,6 +44,7 @@
                     <textarea name="comment" required cols="30" rows="10" placeholder="Votre commentaire"></textarea>
                 </div>
                 <button type="submit">ENVOYER</button>
+                <a href="/GBAF/acteur.php?id=<?= $id ?>" class="personal-link-acteur">Retour</a>
             </form>
         </div>
 

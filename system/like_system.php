@@ -16,6 +16,6 @@
         $insertValue = $db->prepare('INSERT INTO vote(id_user, id_acteur, vote) VALUES(?, ?, ?)');
         $insertValue->execute([$_SESSION['id'], $id, $value]);
 
-        header('Location: ../acteur.php?id='.$id);
+        header('Location: ../acteur.php?id='.$id.'#comments');
         exit;
     }

@@ -84,7 +84,7 @@
                 <form action="" method="POST">
                     <div>
                         <label for="question">Question secrète :</label>
-                        <input type="text" disabled value="<?= $user['question'] ?>" name="question">
+                        <span class="question"><?= $user['question'] ?></span>
                     </div>     
                     <div>
                         <label for="reponse">Réponse secrète <span class="required">*</span> : </label>
