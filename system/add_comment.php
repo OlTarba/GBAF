@@ -10,6 +10,15 @@
 
     $id = str_secur($_GET['id']);
 
+    $reqPostUser = $db->prepare('SELECT COUNT(*) AS postUserCount FROM post WHERE id_acteur = ? AND id_user = ?');
+    $reqPostUser->execute([$id, $_SESSION['id']]);
+    $postUserCount = $reqPostUser->fetch();
+
+    if($postUserCount['postUserCount'] != 0){
+        header("Location: /GBAF/acteur.php?id=".$id."#comments");
+        exit;
+    }
+
     $reqActeur = $db->prepare('SELECT * FROM acteur WHERE id_acteur = ?');
     $reqActeur->execute([$id]);
 
