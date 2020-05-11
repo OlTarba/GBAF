@@ -1,11 +1,11 @@
 <?php 
     session_start();
 
-    require_once '../include/database.php';
-    require_once '../include/functions.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/GBAF/include/database.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/GBAF/include/functions.php';
 
     if(!isset($_SESSION['connect'])){
-        header('Location: ../connexion.php');
+        header('Location: /GBAF/connexion.php');
 
     }
 
@@ -16,6 +16,6 @@
         $insertValue = $db->prepare('INSERT INTO vote(id_user, id_acteur, vote) VALUES(?, ?, ?)');
         $insertValue->execute([$_SESSION['id'], $id, $value]);
 
-        header('Location: ../acteur.php?id='.$id.'#comments');
+        header('Location: /GBAF/acteur.php?id='.$id.'#comments');
         exit;
     }

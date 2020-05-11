@@ -1,11 +1,11 @@
 <?php 
     session_start();
 
-    require_once '../include/database.php';
-    require_once '../include/functions.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/GBAF/include/database.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/GBAF/include/functions.php';
 
     if(!isset($_SESSION['connect'])){
-        header('Location: ../connexion.php');
+        header('Location: /GBAF/connexion.php');
     }
 
     $id = str_secur($_GET['id']);
@@ -21,7 +21,7 @@
         $reqInsertComment = $db->prepare('INSERT INTO post(id_user, id_acteur, post) VALUES(?, ?, ?)');
         $reqInsertComment->execute([$_SESSION['id'], $id, $comment]);
 
-        header('Location: ../acteur.php?id='.$id.'#comments');
+        header('Location: /GBAF/acteur.php?id='.$id.'#comments');
         exit;
     }
     
@@ -30,11 +30,11 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <?php require_once 'include_system/head.php'; ?>
+        <?php require_once $_SERVER['DOCUMENT_ROOT'].'/GBAF/include/head.php'; ?>
         <title>GBAF | Nouveau commentaire</title>
     </head>
     <body>
-        <?php include_once 'include_system/header.php'; ?>
+        <?php include_once $_SERVER['DOCUMENT_ROOT'].'/GBAF/include/header.php'; ?>
 
         <div class="card-form form add-comment">
             <h3><?= $acteur['acteur'] ?></h3>
@@ -49,7 +49,7 @@
         </div>
 
         <div class="fixed-footer">
-            <?php include_once '../include/footer.php'; ?>
+            <?php include_once $_SERVER['DOCUMENT_ROOT'].'/GBAF/include/footer.php'; ?>
         </div>
     </body>
 </html>

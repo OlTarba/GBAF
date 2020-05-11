@@ -2,7 +2,7 @@
     session_start();
 
     if(!isset($_SESSION['connect'])){
-        header('Location: ../connexion.php');
+        header('Location: /GBAF/connexion.php');
         exit;
     }
 ?>
@@ -11,11 +11,11 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <?php require_once 'include_system/head.php'; ?> 
+        <?php require_once $_SERVER['DOCUMENT_ROOT'].'/GBAF/include/head.php'; ?> 
         <title>GBAF | Erreur 404</title>
     </head>
     <body>
-        <?php include_once 'include_system/header.php'; ?>
+        <?php include_once $_SERVER['DOCUMENT_ROOT'].'/GBAF/include/header.php'; ?>
 
         <div class="card form">
             <h3>ERREUR 404</h3>
@@ -23,7 +23,7 @@
         </div>
 
         <div class="fixed-footer">
-            <?php include_once '../include/footer.php'; ?>
+            <?php include_once $_SERVER['DOCUMENT_ROOT'].'/GBAF/include/footer.php'; ?>
         </div>
     </body>
 </html>

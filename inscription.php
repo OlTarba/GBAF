@@ -2,11 +2,11 @@
     session_start();
 
     if(isset($_SESSION['connect'])){
-        header('Location: index.php');
+        header('Location: /GBAF/index.php');
     }
 
-    require_once 'include/database.php';
-    require_once 'include/functions.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/GBAF/include/database.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/GBAF/include/functions.php';
 
 
 
@@ -27,13 +27,13 @@
 
         while($username = $reqPseudo->fetch()){
             if($username['countUsername'] != 0){
-                header('Location: inscription.php?error=1&message=Le pseudonyme est déjà utilisé');
+                header('Location: /GBAF/inscription.php?error=1&message=Le pseudonyme est déjà utilisé');
                 exit;
             }else{
                 $reqInsert = $db->prepare('INSERT INTO account(nom, prenom, username, password, question, reponse) VALUES(?, ?, ?, ?, ?, ?)');
                 $reqInsert->execute([$nom, $prenom, $pseudo, $password, $question, $reponse]);
 
-                header('Location: inscription.php?success=1&message=Bienvenue ! Vous pouvez maintenant vous connecter !');
+                header('Location: /GBAF/inscription.php?success=1&message=Bienvenue ! Vous pouvez maintenant vous connecter !');
                 exit;
             }
         }
@@ -45,11 +45,11 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <?php require_once 'include/head.php'; ?>
+        <?php require_once $_SERVER['DOCUMENT_ROOT'].'/GBAF/include/head.php'; ?>
         <title>GBAF | Inscription </title>
     </head>
     <body>
-        <?php include_once 'include/header.php'; ?>
+        <?php include_once $_SERVER['DOCUMENT_ROOT'].'/GBAF/include/header.php'; ?>
 
         <div class="card-form form">
             <h3>Inscription</h3>
@@ -81,7 +81,7 @@
                 <button type="submit">VALIDER</button>
             </form>
             <br>
-            <p>Vous êtes déjà inscrit ? <a href="connexion.php" class="link-button">Se connecter</a></p>
+            <p>Vous êtes déjà inscrit ? <a href="/GBAF/connexion.php" class="link-button">Se connecter</a></p>
             <?php if(isset($_GET['error'])){ ?>
                 <p class="error"><?= $_GET['message'] ?></p>
             <?php }else if(isset($_GET['success'])){ ?>
@@ -91,7 +91,7 @@
         </div>
 
         <div class="fixed-footer">
-            <?php include_once 'include/footer.php'; ?>
+            <?php include_once $_SERVER['DOCUMENT_ROOT'].'/GBAF/include/footer.php'; ?>
         </div>
     </body>
 </html>

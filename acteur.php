@@ -1,11 +1,11 @@
 <?php  
     session_start();
     
-    require_once 'include/database.php';
-    require_once 'include/functions.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/GBAF/include/database.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/GBAF/include/functions.php';
 
     if(!isset($_SESSION['connect'])){
-        header('Location: connexion.php');
+        header('Location: /GBAF/connexion.php');
     }
 
     $id = str_secur($_GET['id']);
@@ -15,7 +15,7 @@
     $acteur = $reqActeurPage->fetch();
 
     if($acteur === false){
-        header('Location: system/error.php');
+        header('Location: /GBAF/system/error.php');
     }
 
     $reqPost = $db->prepare('SELECT * FROM post INNER JOIN account ON post.id_user = account.id_user WHERE post.id_acteur ');
@@ -36,7 +36,7 @@
     $buttonNewComment = '';
 
     if($postCount['postCount'] == 0 || $postUserCount['postUserCount'] == 0){
-        $buttonNewComment = '<a href="system/add_comment.php?id='.$id.'" class="new-comment">Nouveau <br> commentaire</a>';
+        $buttonNewComment = '<a href="/GBAF/system/add_comment.php?id='.$id.'" class="new-comment">Nouveau <br> commentaire</a>';
     }
 
     $reqLike = $db->prepare('SELECT COUNT(*) AS countLike FROM vote WHERE id_acteur = ? AND vote = ?');
@@ -55,11 +55,11 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <?php require_once 'include/head.php'; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'].'/GBAF/include/head.php'; ?>
     <title>GBAF | <?= $acteur['acteur'] ?></title>
 </head>
 <body>
-    <?php include_once 'include/header.php'; ?>
+    <?php include_once $_SERVER['DOCUMENT_ROOT'].'/GBAF/include/header.php'; ?>
 
     <div class="card">
         <img src="img/<?= $acteur['logo'] ?>" class="logo-acteur" alt="<?= $acteur['acteur'] ?>">
@@ -77,20 +77,20 @@
                 <?= $buttonNewComment ?>
                 <?php if($voted['countVote'] == 0){ ?>
                     <div class="like">
-                        <a href="system/like_system.php?value=1&id=<?= $id ?>"><img src="img/like.svg" class="comment-like-dislike" alt="Like"></a>
+                        <a href="/GBAF/system/like_system.php?value=1&id=<?= $id ?>"><img src="/GBAF/img/like.svg" class="comment-like-dislike" alt="Like"></a>
                         <?= $like['countLike'] ?>
                     </div>
                     <div class="dislike">
-                        <a href="system/like_system.php?value=2&id=<?= $id ?>"><img src="img/dislike.svg" class="comment-like-dislike" alt="Dislike"></a>
+                        <a href="/GBAF/system/like_system.php?value=2&id=<?= $id ?>"><img src="/GBAF/img/dislike.svg" class="comment-like-dislike" alt="Dislike"></a>
                         <?= $dislike['countDislike'] ?>
                     </div>
                 <?php }else {  ?>
                     <div class="like voted">
-                        <a><img src="img/like.svg" class="comment-like-dislike" alt="Like"></a>
+                        <a><img src="/GBAF/img/like.svg" class="comment-like-dislike" alt="Like"></a>
                         <?= $like['countLike'] ?>
                     </div>
                     <div class="dislike voted">
-                        <a><img src="img/dislike.svg" class="comment-like-dislike" alt="Dislike"></a>
+                        <a><img src="/GBAF/img/dislike.svg" class="comment-like-dislike" alt="Dislike"></a>
                         <?= $dislike['countDislike'] ?>
                     </div>
                 <?php } ?>
@@ -107,6 +107,6 @@
         } ?> 
     </div>
 
-    <?php include_once 'include/footer.php'; ?>    
+    <?php include_once $_SERVER['DOCUMENT_ROOT'].'/GBAF/include/footer.php'; ?>    
 </body>
 </html>
