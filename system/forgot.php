@@ -34,8 +34,8 @@
             $reponse = str_secur($_POST['reponse']);
             $password = str_secur($_POST['password']);
 
-            $password = "tbjda".sha1($password)."7a96";
-            $reponse = "acvp".sha1($reponse)."7m20";
+            $password = sha1($password.'tbjda');
+            $reponse = sha1($reponse.'acvp');
 
             if($reponse === $user['reponse']){
                 $reqUpdatePass = $db->prepare('UPDATE account set password = ? WHERE id_user = ?');

@@ -19,8 +19,8 @@
         $question   = str_secur($_POST['question']);
         $reponse    = str_secur($_POST['reponse']);
 
-        $password   = "tbjda".sha1($password)."7a96";
-        $reponse    = "acvp".sha1($reponse)."7m20";
+        $password   = sha1($password.'tbjda');
+        $reponse    = sha1($reponse.'acvp');
 
         $reqPseudo = $db->prepare('SELECT COUNT(*) as countUsername FROM account WHERE username = ?');
         $reqPseudo->execute([$pseudo]);
@@ -82,7 +82,6 @@
             </form>
             <br>
             <p>Vous êtes déjà inscrit ? <a href="connexion.php" class="link-button">Se connecter</a></p>
-            <br>
             <?php if(isset($_GET['error'])){ ?>
                 <p class="error"><?= $_GET['message'] ?></p>
             <?php }else if(isset($_GET['success'])){ ?>

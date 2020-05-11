@@ -12,7 +12,7 @@
         $pseudo     = str_secur($_POST['pseudo']);
         $password   = str_secur($_POST['password']);
 
-        $password = "tbjda".sha1($password)."7a96";
+        $password = sha1($password.'tbjda');
 
         $reqUsername = $db->prepare('SELECT * FROM account WHERE username = ?');
         $reqUsername->execute([$pseudo]);

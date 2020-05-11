@@ -27,12 +27,12 @@
 
         if(!empty($_POST['password'])){
             $password = str_secur($_POST['password']);
-            $password = 'tbjda'.sha1($password).'7a96';
+            $password = sha1($password.'tbjda');
         }
 
         if(!empty($_POST['reponse'])){
             $reponse = str_secur($_POST['reponse']);
-            $reponse = 'acvp'.sha1($reponse).'7m20';
+            $reponse = sha1($reponse.'acvp');
         }
 
         $reqUsernameUsed = $db->prepare('SELECT COUNT(*) AS countUserUsed FROM account WHERE username = ?');

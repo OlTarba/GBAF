@@ -80,7 +80,7 @@ header .logo{
     width: 40vw;
     border-radius:3px;
     margin: 0px auto;
-    margin-top: 5vh;
+    margin-top: 1vh;
 }
 
 .card{
@@ -253,15 +253,15 @@ header .logo{
 }
 .form label{
     margin-top:5px;
-    font-size:20px;
+    font-size:18px;
 }
 .required{
     color:#FF0000;
     font-weight:bold;
 }
 .form input, .form textarea{
-    height:40px;
-    font-size:18px;
+    height:35px;
+    font-size:17px;
     border: 2px solid #333;
     border-radius:3px;
     transition: border 0.3s;
