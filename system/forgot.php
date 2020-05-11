@@ -41,7 +41,7 @@
                 $reqUpdatePass = $db->prepare('UPDATE account set password = ? WHERE id_user = ?');
                 $reqUpdatePass->execute([$password, $user['id_user']]);
 
-                header('Location: ../connexion.php?success=1&message=Votre mot de passe à bien été modifier.');
+                header('Location: ../connexion.php?success=1&message=Votre mot de passe à bien été modifié.');
                 exit;
             
             }else{

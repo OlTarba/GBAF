@@ -150,7 +150,9 @@ header .logo{
 .card .logo-acteur{
     display:block;
     margin: 10px auto;
+    width:50%;
     border-radius:3px;
+    box-shadow:0px 0px 5px rgba(0,0,0,0.5);
 }
 .comment-heading{
     display:flex;
@@ -322,4 +324,39 @@ footer{
     bottom:0;
     left:0;
     right:0;
+}
+
+/* TABLETTE */ 
+
+@media screen and (max-width:1350px){
+    /* HEADER */ 
+    header .logo{
+        margin-left:40px;
+    }
+    .user-info{
+        margin-right: 40px;
+    }
+    /* FORMULAIRE */ 
+    .card-form{
+        width:90vw;
+    }
+    textarea{
+        max-width:75%;
+        min-width:75%;  
+    }
+    /* ACTEUR ACCUEIL */ 
+    .acteur img{
+        width:25%;
+        max-height:100px;
+    }
+    .acteur h3{
+        font-size:13px;
+        margin-top:0px;
+    }
+    .acteur .content{
+        font-size:11px;
+        width:50%;
+    }
+    /* ACTEUR PAGE */ 
+
 }
