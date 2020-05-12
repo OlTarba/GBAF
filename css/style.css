@@ -80,7 +80,7 @@ header .logo{
     width: 40vw;
     border-radius:3px;
     margin: 0px auto;
-    margin-top: 1vh;
+    margin-top: 5vh;
 }
 
 .card{
@@ -391,6 +391,10 @@ footer{
     .container-user{
         font-size:13px;
     }
+    .container-user a{
+        height:42px!important;
+        display:block;
+    }
     .user-picture{
         width:17px;
     }
@@ -459,5 +463,23 @@ footer{
     }
     .comment-name{
         font-size:15px;
+    }
+}
+
+/* VERTICAL RESPONSIVE FORMULAIRE */ 
+
+@media screen and (max-height:740px){
+    .card-form{
+        margin:2vh auto;
+    }
+    .form h3{
+        font-size:25px;
+    }
+    .form input{
+        height: 30px;
+        font-size:16px;
+    }
+    .form label{
+        font-size:17px;
     }
 }
