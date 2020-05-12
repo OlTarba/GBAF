@@ -40,8 +40,6 @@
         $reqUsernameUsed->execute([$username]); 
         $userUsed = $reqUsernameUsed->fetch();
 
-        debug($userUsed['countUserUsed']);
-
         if($userUsed['countUserUsed'] == 0 || $_SESSION['username'] == $username){
             $reqUpdate = $db->prepare('UPDATE account SET nom = ?, prenom = ?, username = ?, password = ?, question = ?, reponse = ? WHERE id_user = ?');
             $reqUpdate->execute([$nom, $prenom, $username, $password, $question, $reponse, $_SESSION['id']]);
@@ -51,7 +49,6 @@
             
             header('Location: '.$simple_path.'system/user_settings.php?success=1&message=Votre compte a bien été mis à jour.');
             exit;
-        
         }else{
             header('Location: '.$simple_path.'system/user_settings.php?error=1&message=Le pseudonyme est déjà utilisé.');
             exit;

@@ -6,7 +6,7 @@
     require_once $absolute_path.'include/database.php';
 
     if(!isset($_SESSION['connect'])){
-        header('Location : '.$simple_path.'connexion.php');
+        header('Location: '.$simple_path.'connexion.php');
     }
 
     $id = str_secur($_GET['id']);
@@ -16,7 +16,7 @@
     $acteur = $reqActeurPage->fetch();
 
     if($acteur === false){
-        header('Location : '.$simple_path.'system/error.php');
+        header('Location: '.$simple_path.'system/error.php');
     }
 
     $reqPost = $db->prepare('SELECT * FROM post INNER JOIN account ON post.id_user = account.id_user WHERE post.id_acteur ');

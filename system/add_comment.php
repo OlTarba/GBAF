@@ -16,14 +16,18 @@
     $postUserCount = $reqPostUser->fetch();
 
     if($postUserCount['postUserCount'] != 0){
-        header("Location: '.$simple_path.'acteur.php?id=".$id."#comments");
+        header('Location: '.$simple_path.'acteur.php?id='.$id.'#comments');
         exit;
     }
 
     $reqActeur = $db->prepare('SELECT * FROM acteur WHERE id_acteur = ?');
     $reqActeur->execute([$id]);
-
     $acteur = $reqActeur->fetch();
+
+    if($acteur === false){
+        header('Location: '.$simple_path.'system/error.php');
+    }
+
 
     if(!empty($_POST['comment'])){
         $comment = str_secur($_POST['comment']);

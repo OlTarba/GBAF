@@ -21,6 +21,14 @@
         header('Location: '.$simple_path.'acteur.php?id='.$id.'#comments');
         exit;
     }
+    
+    $reqActeur = $db->prepare('SELECT * FROM acteur WHERE id_acteur = ?');
+    $reqActeur->execute([$id]);
+    $acteur = $reqActeur->fetch();
+
+    if($acteur === false){
+        header('Location: '.$simple_path.'system/error.php');
+    }
 
     if($value < 3 && $value > 0){
         $insertValue = $db->prepare('INSERT INTO vote(id_user, id_acteur, vote) VALUES(?, ?, ?)');

@@ -33,6 +33,7 @@
         }
 
         header('Location: '.$simple_path.'connexion.php?error=1&message=Pseudonyme incorrect');
+        exit;
     }   
 
 ?>
