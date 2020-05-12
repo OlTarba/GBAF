@@ -5,7 +5,7 @@
 
     require_once $absolute_path.'include/database.php';
 
-    if(isset($_GET['connect'])){
+    if(isset($_SESSION['connect'])){
         header('Location: '.$simple_path.'index.php');
         exit;
     }
