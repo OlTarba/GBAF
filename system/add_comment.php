@@ -11,19 +11,13 @@
 
     $id = str_secur($_GET['id']);
 
-    $reqPostUser = $db->prepare('SELECT COUNT(*) AS postUserCount FROM post WHERE id_acteur = ? AND id_user = ?');
-    $reqPostUser->execute([$id, $_SESSION['id']]);
-    $postUserCount = $reqPostUser->fetch();
-
+    $postUserCount = countWhereAnd('postUserCount', 'post', 'id_acteur', 'id_user', $id, $_SESSION['id']);
     if($postUserCount['postUserCount'] != 0){
         header('Location: '.$simple_path.'acteur.php?id='.$id.'#comments');
         exit;
     }
 
-    $reqActeur = $db->prepare('SELECT * FROM acteur WHERE id_acteur = ?');
-    $reqActeur->execute([$id]);
-    $acteur = $reqActeur->fetch();
-
+    $acteur = selectAllWhere('acteur','id_acteur', $id);
     if($acteur === false){
         header('Location: '.$simple_path.'system/error.php');
     }

@@ -13,19 +13,14 @@
     $id     = str_secur($_GET['id']);
     $value  = str_secur($_GET['value']);
 
-    $reqUserVote = $db->prepare('SELECT COUNT(*) AS countVote FROM vote WHERE id_acteur = ? AND id_user = ?');
-    $reqUserVote->execute([$id, $_SESSION['id']]);
-    $voted = $reqUserVote->fetch();
+    $voted = countWhereAnd('countVote', 'vote', 'id_acteur', 'id_user', $id, $_SESSION['id']);
 
     if($voted['countVote'] != 0){
         header('Location: '.$simple_path.'acteur.php?id='.$id.'#comments');
         exit;
     }
     
-    $reqActeur = $db->prepare('SELECT * FROM acteur WHERE id_acteur = ?');
-    $reqActeur->execute([$id]);
-    $acteur = $reqActeur->fetch();
-
+    $acteur = selectAllWhere('acteur', 'id_acteur', $id);
     if($acteur === false){
         header('Location: '.$simple_path.'system/error.php');
     }

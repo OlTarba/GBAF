@@ -2,7 +2,6 @@
     session_start();
 
     require_once $_SERVER['DOCUMENT_ROOT'].'/GBAF/include/functions.php';
-
     require_once $absolute_path.'include/database.php';
 
     if(!isset($_SESSION['connect'])){
@@ -11,10 +10,7 @@
 
     $id = str_secur($_GET['id']);
 
-    $reqActeurPage = $db->prepare('SELECT * FROM acteur WHERE id_acteur = ?');
-    $reqActeurPage->execute([$id]);
-    $acteur = $reqActeurPage->fetch();
-
+    $acteur = selectAllWhere('acteur', 'id_acteur', $id);
     if($acteur === false){
         header('Location: '.$simple_path.'system/error.php');
     }
@@ -25,32 +21,20 @@
     $reqPostCount = $db->prepare('SELECT COUNT(*) AS postCount FROM post WHERE id_acteur = ?');
     $reqPostCount->execute([$id]);
     $postCount = $reqPostCount->fetch();
-    
     $postCount['postCount'] > 1 ? $commentaires = "Commentaires" : $commentaires = "Commentaire";
 
+    $postUserCount = countWhereAnd('postUserCount', 'post', 'id_acteur', 'id_user', $id, $_SESSION['id']);
 
-    $reqPostUser = $db->prepare('SELECT COUNT(*) AS postUserCount FROM post WHERE id_acteur = ? AND id_user = ?');
-    $reqPostUser->execute([$id, $_SESSION['id']]);
-
-    $postUserCount = $reqPostUser->fetch();
-
-    $buttonNewComment = '';
-
-    if($postCount['postCount'] == 0 || $postUserCount['postUserCount'] == 0){
+    if($postUserCount['postUserCount'] == 0){
         $buttonNewComment = '<a href="'.$simple_path.'system/add_comment.php?id='.$id.'" class="new-comment">Nouveau <br> commentaire</a>';
+    }else{
+        $buttonNewComment = '';
     }
 
-    $reqLike = $db->prepare('SELECT COUNT(*) AS countLike FROM vote WHERE id_acteur = ? AND vote = ?');
-    $reqLike->execute([$id, 1]);
-    $like = $reqLike->fetch();
+    $like       = countWhereAnd('countLike', 'vote', 'id_acteur', 'vote', $id, 1);
+    $dislike    = countWhereAnd('countDislike', 'vote', 'id_acteur', 'vote', $id, 2);
+    $voted      = countWhereAnd('countVote', 'vote', 'id_acteur', 'id_user', $id, $_SESSION['id']);
 
-    $reqDislike = $db->prepare('SELECT COUNT(*) AS countDislike FROM vote WHERE id_acteur = ? AND vote = ?');
-    $reqDislike->execute([$id, 2]);
-    $dislike = $reqDislike->fetch();
-
-    $reqUserVote = $db->prepare('SELECT COUNT(*) AS countVote FROM vote WHERE id_acteur = ? AND id_user = ?');
-    $reqUserVote->execute([$id, $_SESSION['id']]);
-    $voted = $reqUserVote->fetch();
 ?>
 
 <!DOCTYPE html>
