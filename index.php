@@ -34,7 +34,7 @@
         </p>
     </div>
 
-    <div class="card">
+    <div class="card listing">
         <?php while($acteur = $reqActeur->fetch()){ ?>
             <div class="acteur">
                 <img src="<?= $simple_path ?>img/<?= $acteur['logo'] ?>" alt="<?= $acteur['acteur'] ?>">

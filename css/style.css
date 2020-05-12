@@ -2,6 +2,7 @@
 *{
     box-sizing: border-box;
     font-family: "Open Sans", sans-serif;
+    line-height: 1.5em;;
 }
 body{
     margin:0;
@@ -91,6 +92,10 @@ header .logo{
     border-radius:3px;
     margin: 125px auto;
 }
+.listing{
+    background-color:#FFF;
+    box-shadow:none;
+}
 .add-comment{
     width:50vw;
 }
@@ -99,7 +104,7 @@ header .logo{
 
 .acteur{
     display:flex;
-    background-color: #DDD;
+    background-color: #EEE;
     padding:10px;
     border-radius:3px;
     margin: 10px;
@@ -166,7 +171,7 @@ header .logo{
 .comment-heading h5{
     font-size:30px;
     text-transform: capitalize;
-    margin-left: 10px;
+    margin: 10px 10px!important;
 }
 .new-comment{
     color:#333;
@@ -379,6 +384,23 @@ footer{
     /* HEADER */ 
     .gbaf-title{
         font-size:18px;
+    }
+    /* ACTEUR PAGE */
+    .card .logo-acteur{
+        width:80%;
+    }
+    .new-comment{
+        padding:5px;
+    }
+    .comment-heading h5{
+        font-size:20px;
+        margin:20px;
+    }
+    .comment-heading{
+        display:block;
+    }
+    .comment-name{
+        font-size:15px;
     }
 }
 
