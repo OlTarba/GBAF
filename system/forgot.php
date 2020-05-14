@@ -1,12 +1,11 @@
 <?php 
     session_start();
 
-    require_once $_SERVER['DOCUMENT_ROOT'].'/GBAF/include/functions.php';
-
-    require_once $absolute_path.'include/database.php';
+    require_once '../include/functions.php';
+    require_once '../include/database.php';
 
     if(isset($_SESSION['connect'])){
-        header('Location: '.$simple_path.'index.php');
+        header('Location: ../index.php');
         exit;
     }
 
@@ -19,11 +18,11 @@
         
         
         if(!$user){
-            header('Location: '.$simple_path.'system/forgot.php?error=Pseudonyme inconnu');
+            header('Location: forgot.php?error=Pseudonyme inconnu');
             exit;
         }
         
-        header('Location: '.$simple_path.'system/forgot.php?question='.$user['id_user']);
+        header('Location: forgot.php?question='.$user['id_user']);
     }
 
     if(isset($_GET['question'])){
@@ -42,11 +41,11 @@
                 $reqUpdatePass = $db->prepare('UPDATE account set password = ? WHERE id_user = ?');
                 $reqUpdatePass->execute([$password, $user['id_user']]);
 
-                header('Location: '.$simple_path.'connexion.php?success=1&message=Votre mot de passe à bien été modifié.');
+                header('Location: ../connexion.php?success=1&message=Votre mot de passe à bien été modifié.');
                 exit;
             
             }else{
-                header('Location: '.$simple_path.'system/forgot.php?question='.$user['id_user'].'&error=Réponse incorrect');
+                header('Location: forgot.php?question='.$user['id_user'].'&error=Réponse incorrect');
                 exit;
             }
         }
@@ -58,11 +57,11 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <?php require_once $absolute_path.'include/head.php'; ?>
+        <?php require_once '../include/head.php'; ?>
         <title>GBAF | Mot de passe oublié</title>
     </head>
     <body>
-        <?php include_once $absolute_path.'include/header.php'; ?>
+        <?php include_once '../include/header.php'; ?>
 
         <?php if(!isset($_GET['question'])){ ?>
             <div class="card-form form">
@@ -103,7 +102,7 @@
             </div>
         <?php } ?>    
         <div class="fixed-footer">
-            <?php include_once $absolute_path.'include/footer.php'; ?> 
+            <?php include_once '../include/footer.php'; ?> 
         </div>
     </body>
 </html>

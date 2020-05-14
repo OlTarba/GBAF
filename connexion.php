@@ -1,11 +1,11 @@
 <?php 
     session_start();
 
-    require_once $_SERVER['DOCUMENT_ROOT'].'/GBAF/include/functions.php';
-    require_once $absolute_path.'include/database.php';
+    require_once 'include/functions.php';
+    require_once 'include/database.php';
 
     if(isset($_SESSION['connect'])){
-        header('Location: '.$simple_path.'index.php');
+        header('Location: index.php');
     }
 
     if(!empty($_POST['pseudo']) && !empty($_POST['password'])){
@@ -24,15 +24,15 @@
                 $_SESSION['prenom']         = $username['prenom'];
                 $_SESSION['connect']        = 1;
 
-                header('Location: '.$simple_path.'index.php');
+                header('Location: index.php');
                 exit;            
             }else{
-                header('Location: '.$simple_path.'connexion.php?error=1&message=Mot de passe incorrect');
+                header('Location: connexion.php?error=1&message=Mot de passe incorrect');
                 exit;
             }
         }
 
-        header('Location: '.$simple_path.'connexion.php?error=1&message=Pseudonyme incorrect');
+        header('Location: connexion.php?error=1&message=Pseudonyme incorrect');
         exit;
     }   
 
@@ -41,11 +41,11 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <?php require_once $absolute_path.'include/head.php'; ?>
+        <?php require_once 'include/head.php'; ?>
         <title>GBAF | Connexion </title>
     </head>
     <body>
-        <?php include_once $absolute_path.'include/header.php'; ?>
+        <?php include_once 'include/header.php'; ?>
 
         <div class="card-form form">
             <h3>Connexion</h3>
@@ -62,8 +62,8 @@
                 <button type="submit">CONNEXION</button>
             </form>
             <br>
-            <p>Pas encore inscrit ? <a href="<?= $simple_path ?>inscription.php" class="link-button">S'inscrire</a></p>
-            <p><a href="<?= $simple_path ?>system/forgot.php" class="link-button">Mot de passe oublié ?</a></p>
+            <p>Pas encore inscrit ? <a href="inscription.php" class="link-button">S'inscrire</a></p>
+            <p><a href="system/forgot.php" class="link-button">Mot de passe oublié ?</a></p>
             <br>
             <?php if(isset($_GET['error'])){ ?>
                 <p class="error"><?= $_GET['message'] ?></p>
@@ -73,7 +73,7 @@
         </div>
 
         <div class="fixed-footer">
-            <?php include_once $absolute_path.'include/footer.php'; ?>
+            <?php include_once 'include/footer.php'; ?>
         </div>
     </body>
 </html>

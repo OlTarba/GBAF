@@ -1,12 +1,11 @@
 <?php 
     session_start();
 
-    require_once $_SERVER['DOCUMENT_ROOT'].'/GBAF/include/functions.php';
-
-    require_once $absolute_path.'include/database.php';
+    require_once '../include/functions.php';
+    require_once '../include/database.php';
 
     if(!isset($_SESSION['connect'])){
-        header('Location: '.$simple_path.'connexion.php');
+        header('Location: ../connexion.php');
         exit;
     }
 
@@ -47,10 +46,10 @@
             $_SESSION['nom']    = $nom;
             $_SESSION['prenom'] = $prenom;
             
-            header('Location: '.$simple_path.'system/user_settings.php?success=1&message=Votre compte a bien été mis à jour.');
+            header('Location: user_settings.php?success=1&message=Votre compte a bien été mis à jour.');
             exit;
         }else{
-            header('Location: '.$simple_path.'system/user_settings.php?error=1&message=Le pseudonyme est déjà utilisé.');
+            header('Location: user_settings.php?error=1&message=Le pseudonyme est déjà utilisé.');
             exit;
         }
     }
@@ -59,11 +58,11 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <?php require_once $absolute_path.'include/head.php'; ?> 
+        <?php require_once '../include/head.php'; ?> 
         <title>GBAF | <?= $user['prenom'].' '.$user['nom'] ?></title>
     </head>
     <body>
-        <?php include_once $absolute_path.'include/header.php'; ?> 
+        <?php include_once '../include/header.php'; ?> 
 
         <div class="card-form form">
         <h3>Paramètre de compte</h3>
@@ -104,7 +103,7 @@
 
 
         <div class="fixed-footer">
-            <?php include_once $absolute_path.'include/footer.php'; ?>
+            <?php include_once '../include/footer.php'; ?>
         </div>
     </body>
 </html>

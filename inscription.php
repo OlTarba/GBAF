@@ -1,11 +1,11 @@
 <?php 
     session_start();
 
-    require_once $_SERVER['DOCUMENT_ROOT'].'/GBAF/include/functions.php';
-    require_once $absolute_path.'include/database.php';
+    require_once 'include/functions.php';
+    require_once 'include/database.php';
 
     if(isset($_SESSION['connect'])){
-        header('Location: '.$simple_path.'index.php');
+        header('Location: index.php');
     }
 
     if(!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['pseudo']) && !empty($_POST['password']) && !empty($_POST['question']) && !empty($_POST['reponse'])){
@@ -25,13 +25,13 @@
 
         while($username = $reqPseudo->fetch()){
             if($username['countUsername'] != 0){
-                header('Location: '.$simple_path.'inscription.php?error=1&message=Le pseudonyme est déjà utilisé');
+                header('Location: inscription.php?error=1&message=Le pseudonyme est déjà utilisé');
                 exit;
             }else{
                 $reqInsert = $db->prepare('INSERT INTO account(nom, prenom, username, password, question, reponse) VALUES(?, ?, ?, ?, ?, ?)');
                 $reqInsert->execute([$nom, $prenom, $pseudo, $password, $question, $reponse]);
 
-                header('Location: '.$simple_path.'inscription.php?success=1&message=Bienvenue ! Vous pouvez maintenant vous connecter !');
+                header('Location: inscription.php?success=1&message=Bienvenue ! Vous pouvez maintenant vous connecter !');
                 exit;
             }
         }
@@ -43,11 +43,11 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <?php require_once $absolute_path.'include/head.php'; ?>
+        <?php require_once 'include/head.php'; ?>
         <title>GBAF | Inscription </title>
     </head>
     <body>
-        <?php include_once $absolute_path.'include/header.php'; ?>
+        <?php include_once 'include/header.php'; ?>
 
         <div class="card-form form">
             <h3>Inscription</h3>
@@ -79,7 +79,7 @@
                 <button type="submit">VALIDER</button>
             </form>
             <br>
-            <p>Vous êtes déjà inscrit ? <a href="<?= $simple_path ?>connexion.php" class="link-button">Se connecter</a></p>
+            <p>Vous êtes déjà inscrit ? <a href="connexion.php" class="link-button">Se connecter</a></p>
             <?php if(isset($_GET['error'])){ ?>
                 <p class="error"><?= $_GET['message'] ?></p>
             <?php }else if(isset($_GET['success'])){ ?>
@@ -89,7 +89,7 @@
         </div>
 
         <div class="fixed-footer">
-            <?php include_once $absolute_path.'include/footer.php'; ?>
+            <?php include_once 'include/footer.php'; ?>
         </div>
     </body>
 </html>
