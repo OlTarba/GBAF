@@ -24,7 +24,7 @@
     $reqPostCount = $db->prepare('SELECT COUNT(*) AS postCount FROM post WHERE id_acteur = ?');
     $reqPostCount->execute([$id]);
     $postCount = $reqPostCount->fetch();
-    $postCount['postCount'] > 1 ? $commentaires = "Commentaires" : $commentaires = "Commentaire";
+    $postCount['postCount'] >= 1 ? $commentaires = "Commentaires" : $commentaires = "Commentaire";
 
     // Compte et affiche ou non le bouton de nouveau commentaire si l'utilisateur n'a pas encore commenté l'acteur
     $postUserCount = countWhereAnd('postUserCount', 'post', 'id_acteur', 'id_user', $id, $_SESSION['id']);
@@ -91,7 +91,7 @@
                 <?php } ?>
             </div>
         </div>
-        
+
         <!-- Affichage dynamique des commentaires -->
         <?php while($post = $reqPost->fetch()){ 
             if($post['id_acteur'] === $id){ ?>
