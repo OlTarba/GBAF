@@ -9,6 +9,7 @@
         exit;
     }
 
+    // Etape 1 : Récupère le pseudo, le sécurise et redirectionne vers l'étape suivant
     if(!empty($_POST['pseudo'])){
         $pseudo = str_secur($_POST['pseudo']);
 
@@ -25,6 +26,7 @@
         header('Location: forgot.php?question='.$user['id_user']);
     }
 
+    // Etape 2 : Récupère la réponse chiffré, chiffre le nouveau mot de passe et l'insert dans la base de donnée 
     if(isset($_GET['question'])){
         $reqQuestion = $db->prepare('SELECT * FROM account WHERE id_user = ?');
         $reqQuestion->execute([$_GET['question']]);
@@ -63,6 +65,7 @@
     <body>
         <?php include_once '../include/header.php'; ?>
 
+        <!-- Affichage en deux étapes (Etape 1 : Pseudo | Etape 2 : Question, réponse, nouveau mot de passe) -->
         <?php if(!isset($_GET['question'])){ ?>
             <div class="card-form form">
                 <h3>Mot de passe oublié</h3>
@@ -101,6 +104,7 @@
                 </form>
             </div>
         <?php } ?>    
+        
         <div class="fixed-footer">
             <?php include_once '../include/footer.php'; ?> 
         </div>

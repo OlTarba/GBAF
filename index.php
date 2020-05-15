@@ -1,16 +1,18 @@
 <?php 
     session_start();
 
+    // Inclus les functions et la connexion à la base de donnée
     require_once 'include/functions.php';
     require_once 'include/database.php';
 
+    // Redirection si l'utilisateur n'est pas connecté
     if(!isset($_SESSION['connect'])){
         header('Location: connexion.php');
     }
 
+    // Récupère les données de tout les acteurs
     $reqActeur = $db->prepare('SELECT * FROM acteur');
     $reqActeur->execute([]);
-
 
 ?>
 
@@ -23,6 +25,7 @@
 <body>
     <?php include_once 'include/header.php'; ?>
 
+    <!-- Affichage de la description de GBAF -->
     <div class="description">
         <h1>Le Groupement Banque Assurance Français</h1>
         <p>Fédération représentant les 6 grands groupes français : 
@@ -33,6 +36,7 @@
         </p>
     </div>
 
+    <!-- Affichage des acteurs -->
     <div class="card listing">
         <?php while($acteur = $reqActeur->fetch()){ ?>
             <div class="acteur">
@@ -48,9 +52,6 @@
             </div>
         <?php } ?>
     </div>
-
-
-
 
     <?php include_once 'include/footer.php'; ?>
 </body>

@@ -8,8 +8,10 @@
         header('Location: index.php');
     }
 
+    // Traitement du formulaire
     if(!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['pseudo']) && !empty($_POST['password']) && !empty($_POST['question']) && !empty($_POST['reponse'])){
-
+        
+        // Sécurisation des champs 
         $nom        = str_secur($_POST['nom']);
         $prenom     = str_secur($_POST['prenom']);
         $pseudo     = str_secur($_POST['pseudo']);
@@ -17,13 +19,16 @@
         $question   = str_secur($_POST['question']);
         $reponse    = str_secur($_POST['reponse']);
 
+        // Chiffrage du mot de passe et la réponse secrète
         $password   = sha1($password.'tbjda');
         $reponse    = sha1($reponse.'acvp');
 
+        // Compte le nombre d'utilisateur avec le pseudo souhaité
         $reqPseudo = $db->prepare('SELECT COUNT(*) as countUsername FROM account WHERE username = ?');
         $reqPseudo->execute([$pseudo]);
 
         while($username = $reqPseudo->fetch()){
+            // Message d'erreur si le pseudo est déjà utilisé ou ajout à la base de donnée des informations
             if($username['countUsername'] != 0){
                 header('Location: inscription.php?error=1&message=Le pseudonyme est déjà utilisé');
                 exit;
@@ -36,8 +41,6 @@
             }
         }
     }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -49,6 +52,7 @@
     <body>
         <?php include_once 'include/header.php'; ?>
 
+        <!-- Formulaire d'inscription -->
         <div class="card-form form">
             <h3>Inscription</h3>
             <form action="" method="POST">
@@ -80,12 +84,13 @@
             </form>
             <br>
             <p>Vous êtes déjà inscrit ? <a href="connexion.php" class="link-button">Se connecter</a></p>
+
+            <!-- Affichage des exception (Erreur | Succès) -->
             <?php if(isset($_GET['error'])){ ?>
                 <p class="error"><?= $_GET['message'] ?></p>
             <?php }else if(isset($_GET['success'])){ ?>
                 <p class="success"><?= $_GET['message'] ?></p>
-            <?php } ?>
-                
+            <?php } ?> 
         </div>
 
         <div class="fixed-footer">

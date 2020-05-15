@@ -3,25 +3,27 @@
 
     require_once '../include/functions.php';
     require_once '../include/database.php';
-
+    
     if(!isset($_SESSION['connect'])){
         header('Location: ../connexion.php');
     }
 
     $id = str_secur($_GET['id']);
 
+    // Redirection si l'utilisateur à déjà commenter l'acteur
     $postUserCount = countWhereAnd('postUserCount', 'post', 'id_acteur', 'id_user', $id, $_SESSION['id']);
     if($postUserCount['postUserCount'] != 0){
         header('Location: ../acteur.php?id='.$id.'#comments');
         exit;
     }
 
+    // Redirection si l'id en paramètre correspond à aucun acteur
     $acteur = selectAllWhere('acteur','id_acteur', $id);
     if($acteur === false){
         header('Location: error.php');
     }
 
-
+    // Ajout du commentaire dans la base de donnée ainsi que la redirection vers celui-ci
     if(!empty($_POST['comment'])){
         $comment = str_secur($_POST['comment']);
 

@@ -4,6 +4,7 @@
             <img src="img/GBAF.png" alt="Groupe Bancaire Assurance Français" class="logo">
         </a>
     </div>
+    <!-- Affichage différent si l'utilisateur est connecté ou non -->
     <?php if(isset($_SESSION['connect'])){ ?>
         <div class="container-user">
             <a href="system/deconnexion.php" class="personal-link-acteur">
@@ -18,4 +19,5 @@
     <?php }else{ ?>
         <h1 class="gbaf-title">Le Groupement Banque Assurance Français</h1>
     <?php } ?>
+
 </header>
