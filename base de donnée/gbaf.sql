@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 13 mai 2020 à 01:08
+-- Généré le : ven. 15 mai 2020 à 11:29
 -- Version du serveur :  10.4.11-MariaDB
--- Version de PHP : 7.4.4
+-- Version de PHP : 7.4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,6 +36,14 @@ CREATE TABLE `account` (
   `question` varchar(250) NOT NULL,
   `reponse` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `account`
+--
+
+INSERT INTO `account` (`id_user`, `nom`, `prenom`, `username`, `password`, `question`, `reponse`) VALUES
+(18, 'Berthelin', 'Thibault', 'OlTarba', '45053abcc15186832b392d444437bb449f666e1f', 'BMW ?', '860beddad989e0c2f48a4550eb690ba64b3f8b10'),
+(19, 'Carpentier', 'Angélique', 'Larpentier', '9566cb34c0540b338c2b9361e735cda659374be2', 'Comment s\'appelle la grosse chatte ?', '7a076344e1f09fd026fa20666c33a2be615ead53');
 
 -- --------------------------------------------------------
 
@@ -74,6 +82,17 @@ CREATE TABLE `post` (
   `post` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `post`
+--
+
+INSERT INTO `post` (`id_post`, `id_user`, `id_acteur`, `date_add`, `post`) VALUES
+(27, 18, 1, '2020-05-15 11:18:43', 'Hey ! Super ce que vous faites !'),
+(28, 18, 2, '2020-05-15 11:19:28', 'Tu peux me payer une BMW Serie 8 Stp ? 850i ou une M8 ce serais cool'),
+(29, 19, 1, '2020-05-15 11:20:26', 'Cool ! Vous pouvez financez toute sorte de formation ?'),
+(30, 19, 2, '2020-05-15 11:20:54', 'Il y a moyens de m\'acheter une nouveau petit chatons ? Ou une villa'),
+(31, 19, 4, '2020-05-15 11:23:16', 'Dites ! Vous vous occupez vraiment des auto entreprenneurs, genre Freelance Developpeur Web ?');
+
 -- --------------------------------------------------------
 
 --
@@ -85,6 +104,15 @@ CREATE TABLE `vote` (
   `id_acteur` int(11) NOT NULL,
   `vote` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `vote`
+--
+
+INSERT INTO `vote` (`id_user`, `id_acteur`, `vote`) VALUES
+(18, 1, 1),
+(18, 2, 1),
+(19, 4, 1);
 
 --
 -- Index pour les tables déchargées
@@ -106,7 +134,8 @@ ALTER TABLE `acteur`
 -- Index pour la table `post`
 --
 ALTER TABLE `post`
-  ADD PRIMARY KEY (`id_post`);
+  ADD PRIMARY KEY (`id_post`),
+  ADD KEY `post - account` (`id_user`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -116,7 +145,7 @@ ALTER TABLE `post`
 -- AUTO_INCREMENT pour la table `account`
 --
 ALTER TABLE `account`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT pour la table `acteur`
@@ -128,7 +157,17 @@ ALTER TABLE `acteur`
 -- AUTO_INCREMENT pour la table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `post`
+--
+ALTER TABLE `post`
+  ADD CONSTRAINT `post - account` FOREIGN KEY (`id_user`) REFERENCES `account` (`id_user`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
