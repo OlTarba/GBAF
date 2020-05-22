@@ -4,15 +4,10 @@
     require_once '../include/functions.php';
     require_once '../include/database.php';
 
-    if(!isset($_SESSION['connect'])){
-        header('Location: ../connexion.php');
-        exit;
-    }
+    checkConnect();
 
     // Récupération des données de l'utilisateur connecté
-    $reqUser = $db->prepare('SELECT * FROM account WHERE id_user = ?');
-    $reqUser->execute([$_SESSION['id']]);
-    $user = $reqUser->fetch();
+    $user = selectAllWhere('account', 'id_user', $_SESSION['id']);
 
     // Définie le pseudo avant (éventuelle) modification dans la variable de session
     $_SESSION['username'] = $user['username'];
@@ -32,8 +27,22 @@
 
         // Modification et chiffrage du mot de passe si le champ est rempli
         if(!empty($_POST['password'])){
-            $password = str_secur($_POST['password']);
-            $password = sha1($password.'tbjda');
+            if(!empty($_POST['old-password'])){
+                $oldPassword = str_secur($_POST['old-password']);
+                $oldPassword = sha1($oldPassword.'tbjda');
+
+                if(!empty($_POST['confirm-password'])){
+                    $confirmPassword = str_secur($_POST['confirm-password']);
+                    $password = str_secur($_POST['password']);
+
+                }else{
+                    header('Location: user_settings.php?error=1&message=Vous devez confirmer votre nouveau mot de passe');
+                    exit;
+                }
+            }else{
+                header('Location: user_settings.php?error=1&message=Vous devez renseigner votre mot de passe actuel');
+                exit;
+            }
         }
 
         if(!empty($_POST['reponse'])){
@@ -48,15 +57,27 @@
 
         // Ajout des modifications dans la base de donnée si le pseudo n'est pas utilisé ou qu'il n'a pas changé
         if($userUsed['countUserUsed'] == 0 || $_SESSION['username'] == $username){
-            $reqUpdate = $db->prepare('UPDATE account SET nom = ?, prenom = ?, username = ?, password = ?, question = ?, reponse = ? WHERE id_user = ?');
-            $reqUpdate->execute([$nom, $prenom, $username, $password, $question, $reponse, $_SESSION['id']]);
+            if($oldPassword === $user['password']){
+                if($confirmPassword === $password){
+                    $password = sha1($password.'tbjda');
 
-            // Mis à jour des nom et prénom pour l'affichage du header
-            $_SESSION['nom']    = $nom;
-            $_SESSION['prenom'] = $prenom;
-            
-            header('Location: user_settings.php?success=1&message=Votre compte a bien été mis à jour.');
-            exit;
+                    $reqUpdate = $db->prepare('UPDATE account SET nom = ?, prenom = ?, username = ?, password = ?, question = ?, reponse = ? WHERE id_user = ?');
+                    $reqUpdate->execute([$nom, $prenom, $username, $password, $question, $reponse, $_SESSION['id']]);
+
+                    // Mis à jour des nom et prénom pour l'affichage du header
+                    $_SESSION['nom']    = $nom;
+                    $_SESSION['prenom'] = $prenom;
+                    
+                    header('Location: user_settings.php?success=1&message=Votre compte a bien été mis à jour.');
+                    exit;
+                }else{
+                    header('Location: user_settings.php?error=1&message=Le nouveau de mot de passe n\'est pas identique à sa confirmation');
+                    exit;
+                }
+            }else{
+                header('Location: user_settings.php?error=1&message=Votre mot de passe actuel est incorrect');
+                exit;
+            }
         }else{
             header('Location: user_settings.php?error=1&message=Le pseudonyme est déjà utilisé.');
             exit;
@@ -78,31 +99,38 @@
             <form action="" method="POST">
                 <div>
                     <label for="nom">Nom : </label>
-                    <input type="text" required name="nom" value="<?= $user['nom'] ?>">
+                    <input type="text" required name="nom" id="nom" value="<?= $user['nom'] ?>">
                 </div>
                 <div>
                     <label for="prenom">Prénom : </label>
-                    <input type="text" required name="prenom" value="<?= $user['prenom'] ?>">
+                    <input type="text" required name="prenom" id="prenom" value="<?= $user['prenom'] ?>">
                 </div>
                 <div>
                     <label for="pseudo">Pseudonyme : </label>
-                    <input type="text" name="username" placeholder="<?= $user['username'] ?>">
+                    <input type="text" name="username" id="pseudo" placeholder="<?= $user['username'] ?>">
+                </div>
+                <div>
+                    <label for="old-password">Mot de passe actuel : </label>
+                    <input type="password" id="old-password" name="old-password" placeholder="Entrez votre mot de passe actuel">
                 </div>
                 <div>
                     <label for="password">Nouveau Mot de passe : </label>
-                    <input type="password" name="password" placeholder="Entrez votre nouveau mot de passe">
+                    <input type="password" name="password" id="password" placeholder="Entrez votre nouveau mot de passe">
+                </div>
+                <div>
+                    <label for="confirm-password">Confirmer le mot de passe : </label>
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirmer votre nouveau mot de passe">
                 </div>
                 <div>
                     <label for="question">Question secrête : </label>
-                    <input type="text" required name="question" value="<?= $user['question'] ?>">
+                    <input type="text" required name="question" id="question" value="<?= $user['question'] ?>">
                 </div>
                 <div>
                     <label for="reponse">Réponse secrête : </label>
-                    <input type="text" name="reponse" placeholder="Entrez votre nouvelle réponse">
+                    <input type="text" name="reponse" id="reponse" placeholder="Entrez votre nouvelle réponse">
                 </div>
                 <button type="submit">METTRE A JOUR</button>
             </form>
-            <br>
             <?php if(isset($_GET['error'])){ ?>
                 <p class="error"><?= $_GET['message'] ?></p>
             <?php }else if(isset($_GET['success'])){ ?>

@@ -3,10 +3,7 @@
 
     require_once '../include/functions.php';
 
-    if(!isset($_SESSION['connect'])){
-        header('Location: ../connexion.php');
-        exit;
-    }
+    checkConnect();
 ?>
 
 

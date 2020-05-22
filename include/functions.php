@@ -29,3 +29,31 @@
 
         return $req->fetch();
     }
+
+    // Vérifie si l'utilisateur est connecté et si il est bien inscrit
+    function checkConnect($path = '../connexion'){
+        if(isset($_SESSION['connect'])){
+            $user = selectAllWhere('account', 'username', $_SESSION['username']);
+            if(!$user['username']){
+                header('Location: '.$path.'.php');
+                exit;
+            }
+        }else{
+            header('Location: '.$path.'.php');
+            exit;
+        }
+    }
+
+    // Vérifie si l'utilisateur est déconnecté et si il est bien inscrit
+    function checkDisconnect($pathDisconnect, $pathIndex){
+        if(isset($_SESSION['connect'])){
+            $user = selectAllWhere('account', 'username', $_SESSION['username']);
+            if($_SESSION['username'] != $user['username']){
+                header('Location: '.$pathDisconnect.'.php');
+                exit;
+            }else{
+                header('Location: '.$pathIndex.'.php ');
+                exit;
+            }
+        }
+    }

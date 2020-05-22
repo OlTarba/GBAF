@@ -4,9 +4,7 @@
     require_once '../include/functions.php';
     require_once '../include/database.php';
     
-    if(!isset($_SESSION['connect'])){
-        header('Location: ../connexion.php');
-    }
+    checkConnect();
 
     $id = str_secur($_GET['id']);
 

@@ -6,9 +6,7 @@
     require_once 'include/database.php';
 
     // Redirection si l'utilisateur n'est pas connecté
-    if(!isset($_SESSION['connect'])){
-        header('Location: connexion.php');
-    }
+    checkConnect('connexion');
 
     // Récupère les données de tout les acteurs
     $reqActeur = $db->prepare('SELECT * FROM acteur');
@@ -35,7 +33,6 @@
             financière française. 
         </p>
     </div>
-
     <!-- Affichage des acteurs -->
     <div class="card listing">
         <?php while($acteur = $reqActeur->fetch()){ ?>

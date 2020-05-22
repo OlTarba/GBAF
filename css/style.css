@@ -78,7 +78,7 @@ header .logo{
     background-color:#EEE;
     box-shadow: 0px 0px 7px rgba(0,0,0,0.5);
     padding: 10px;
-    width: 40vw;
+    width: 45vw;
     border-radius:3px;
     margin: 0px auto;
     margin-top: 5vh;
@@ -489,7 +489,7 @@ footer{
 
 /* VERTICAL RESPONSIVE FORMULAIRE */ 
 
-@media screen and (max-height:740px){
+@media screen and (max-height:790px){
     .card-form{
         margin:2vh auto;
     }

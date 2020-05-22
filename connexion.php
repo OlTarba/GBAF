@@ -4,9 +4,7 @@
     require_once 'include/functions.php';
     require_once 'include/database.php';
 
-    if(isset($_SESSION['connect'])){
-        header('Location: index.php');
-    }
+    checkDisconnect('system/deconnexion', 'index');
 
     // Traitement du formulaire
     if(!empty($_POST['pseudo']) && !empty($_POST['password'])){
@@ -15,15 +13,16 @@
 
         $password = sha1($password.'tbjda');
 
-        $reqUsername = $db->prepare('SELECT * FROM account WHERE username = ?');
-        $reqUsername->execute([$pseudo]);
+        $reqUser = $db->prepare('SELECT * FROM account WHERE username = ?');
+        $reqUser->execute([$pseudo]);
 
-        while($username = $reqUsername->fetch()){
+        while($user = $reqUser->fetch()){
             // Définission des variables de session pour la connexion si le mot de passe entré est correct
-            if($password === $username['password']){
-                $_SESSION['id']             = $username['id_user'];
-                $_SESSION['nom']            = $username['nom'];
-                $_SESSION['prenom']         = $username['prenom'];
+            if($password === $user['password']){
+                $_SESSION['id']             = $user['id_user'];
+                $_SESSION['nom']            = $user['nom'];
+                $_SESSION['prenom']         = $user['prenom'];
+                $_SESSION['username']       = $user['username'];
                 $_SESSION['connect']        = 1;
 
                 header('Location: index.php');

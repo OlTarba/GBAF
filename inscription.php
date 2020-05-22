@@ -4,9 +4,8 @@
     require_once 'include/functions.php';
     require_once 'include/database.php';
 
-    if(isset($_SESSION['connect'])){
-        header('Location: index.php');
-    }
+    // Redirection de l'utilisateur si il est connecté 
+    checkDisconnect('system/deconnexion', 'index');
 
     // Traitement du formulaire
     if(!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['pseudo']) && !empty($_POST['password']) && !empty($_POST['question']) && !empty($_POST['reponse'])){

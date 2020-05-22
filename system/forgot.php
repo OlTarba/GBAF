@@ -4,10 +4,8 @@
     require_once '../include/functions.php';
     require_once '../include/database.php';
 
-    if(isset($_SESSION['connect'])){
-        header('Location: ../index.php');
-        exit;
-    }
+    checkDisconnect('deconnexion', '../index');
+
 
     // Etape 1 : Récupère le pseudo, le sécurise et redirectionne vers l'étape suivant
     if(!empty($_POST['pseudo'])){
@@ -28,23 +26,30 @@
 
     // Etape 2 : Récupère la réponse chiffré, chiffre le nouveau mot de passe et l'insert dans la base de donnée 
     if(isset($_GET['question'])){
-        $reqQuestion = $db->prepare('SELECT * FROM account WHERE id_user = ?');
-        $reqQuestion->execute([$_GET['question']]);
-        $user = $reqQuestion->fetch();
 
-        if(!empty($_POST['reponse']) && !empty($_POST['password'])){
-            $reponse = str_secur($_POST['reponse']);
-            $password = str_secur($_POST['password']);
+        $user = selectAllWhere('account', 'id_user', $_GET['question']);
 
-            $password = sha1($password.'tbjda');
+        if(!empty($_POST['reponse']) && !empty($_POST['password']) && !empty($_POST['confirm-password'])){
+            $reponse            = str_secur($_POST['reponse']);
+            $password           = str_secur($_POST['password']);
+            $confirmPassword    = str_secur($_POST['confirm-password']);
+
             $reponse = sha1($reponse.'acvp');
 
             if($reponse === $user['reponse']){
-                $reqUpdatePass = $db->prepare('UPDATE account set password = ? WHERE id_user = ?');
-                $reqUpdatePass->execute([$password, $user['id_user']]);
+                if($confirmPassword === $password){
+                    $password = sha1($password.'tbjda');
 
-                header('Location: ../connexion.php?success=1&message=Votre mot de passe à bien été modifié.');
-                exit;
+                    $reqUpdatePass = $db->prepare('UPDATE account set password = ? WHERE id_user = ?');
+                    $reqUpdatePass->execute([$password, $user['id_user']]);
+
+                    header('Location: ../connexion.php?success=1&message=Votre mot de passe à bien été modifié.');
+                    exit;
+
+                }else{
+                    header('Location: forgot.php?question='.$user['id_user'].'&error=Les mots de passe ne sont pas identique');
+                    exit;
+                }
             
             }else{
                 header('Location: forgot.php?question='.$user['id_user'].'&error=Réponse incorrect');
@@ -87,15 +92,19 @@
                 <form action="" method="POST">
                     <div>
                         <label for="question">Question secrète :</label>
-                        <span class="question"><?= $user['question'] ?></span>
-                    </div>     
+                        <span class="question" id="question"><?= $user['question'] ?></span>
+                    </div>    
                     <div>
                         <label for="reponse">Réponse secrète <span class="required">*</span> : </label>
-                        <input type="text" required name="reponse">
+                        <input type="text" required id="reponse" name="reponse">
                     </div>
                     <div>
                         <label for="password">Nouveau mot de passe <span class="required">*</span> : </label>
-                        <input type="password" required name="password">
+                        <input type="password" required id="password" name="password">
+                    </div>
+                    <div>
+                        <label for="confirm-password">Confirmer le mot de passe <span class="required">*</span> : </label>
+                        <input type="password" required id="confirm-password" name="confirm-password">
                     </div>
                     <button type="submit">VALIDER</button>
                     <?php if(isset($_GET['error'])){ ?> 
