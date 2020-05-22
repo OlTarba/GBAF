@@ -31,11 +31,13 @@
     }
 
     // Vérifie si l'utilisateur est connecté et si il est bien inscrit
-    function checkConnect($path = '../connexion'){
+    function checkConnect($pathDisconnect = 'deconnexion' ,$path = '../connexion'){
         if(isset($_SESSION['connect'])){
-            $user = selectAllWhere('account', 'username', $_SESSION['username']);
-            if(!$user['username']){
-                header('Location: '.$path.'.php');
+            $user = selectAllWhere('account', 'id_user', $_SESSION['id']);
+
+            if($_SESSION['key'] != sha1($user['password'].'gbafwebsite')){
+
+                header('Location: '.$pathDisconnect.'.php');
                 exit;
             }
         }else{
@@ -45,14 +47,17 @@
     }
 
     // Vérifie si l'utilisateur est déconnecté et si il est bien inscrit
-    function checkDisconnect($pathDisconnect, $pathIndex){
+    function checkDisconnect($pathDisconnect, $path){
         if(isset($_SESSION['connect'])){
-            $user = selectAllWhere('account', 'username', $_SESSION['username']);
-            if($_SESSION['username'] != $user['username']){
+            $user = selectAllWhere('account', 'id_user', $_SESSION['id']);
+
+            if($_SESSION['key'] != sha1($user['password'].'gbafwebsite')){
+
                 header('Location: '.$pathDisconnect.'.php');
                 exit;
+
             }else{
-                header('Location: '.$pathIndex.'.php ');
+                header('Location: '.$path.'.php ');
                 exit;
             }
         }

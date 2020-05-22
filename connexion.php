@@ -23,6 +23,7 @@
                 $_SESSION['nom']            = $user['nom'];
                 $_SESSION['prenom']         = $user['prenom'];
                 $_SESSION['username']       = $user['username'];
+                $_SESSION['key']            = sha1($user['password'].'gbafwebsite');
                 $_SESSION['connect']        = 1;
 
                 header('Location: index.php');

@@ -30,13 +30,25 @@
             if(!empty($_POST['old-password'])){
                 $oldPassword = str_secur($_POST['old-password']);
                 $oldPassword = sha1($oldPassword.'tbjda');
+                
+                if($oldPassword === $user['password']){
+                    if(!empty($_POST['confirm-password'])){
+                        $confirmPassword = str_secur($_POST['confirm-password']);
+                        $password = str_secur($_POST['password']);
 
-                if(!empty($_POST['confirm-password'])){
-                    $confirmPassword = str_secur($_POST['confirm-password']);
-                    $password = str_secur($_POST['password']);
+                        if($confirmPassword === $password){
+                            $password = sha1($password.'tbjda');
+                        }else{
+                            header('Location: user_settings.php?error=1&message=Le nouveau de mot de passe n\'est pas identique à sa confirmation');
+                            exit;
+                        }
 
+                    }else{
+                        header('Location: user_settings.php?error=1&message=Vous devez confirmer votre nouveau mot de passe');
+                        exit;
+                    }
                 }else{
-                    header('Location: user_settings.php?error=1&message=Vous devez confirmer votre nouveau mot de passe');
+                    header('Location: user_settings.php?error=1&message=Votre mot de passe actuel est incorrect');
                     exit;
                 }
             }else{
@@ -57,27 +69,18 @@
 
         // Ajout des modifications dans la base de donnée si le pseudo n'est pas utilisé ou qu'il n'a pas changé
         if($userUsed['countUserUsed'] == 0 || $_SESSION['username'] == $username){
-            if($oldPassword === $user['password']){
-                if($confirmPassword === $password){
-                    $password = sha1($password.'tbjda');
 
-                    $reqUpdate = $db->prepare('UPDATE account SET nom = ?, prenom = ?, username = ?, password = ?, question = ?, reponse = ? WHERE id_user = ?');
-                    $reqUpdate->execute([$nom, $prenom, $username, $password, $question, $reponse, $_SESSION['id']]);
+            $reqUpdate = $db->prepare('UPDATE account SET nom = ?, prenom = ?, username = ?, password = ?, question = ?, reponse = ? WHERE id_user = ?');
+            $reqUpdate->execute([$nom, $prenom, $username, $password, $question, $reponse, $_SESSION['id']]);
 
-                    // Mis à jour des nom et prénom pour l'affichage du header
-                    $_SESSION['nom']    = $nom;
-                    $_SESSION['prenom'] = $prenom;
+            // Mis à jour des nom et prénom pour l'affichage du header
+            $_SESSION['nom']        = $nom;
+            $_SESSION['prenom']     = $prenom;
+            $_SESSION['key']        = sha1($password.'gbafwebsite');
                     
-                    header('Location: user_settings.php?success=1&message=Votre compte a bien été mis à jour.');
-                    exit;
-                }else{
-                    header('Location: user_settings.php?error=1&message=Le nouveau de mot de passe n\'est pas identique à sa confirmation');
-                    exit;
-                }
-            }else{
-                header('Location: user_settings.php?error=1&message=Votre mot de passe actuel est incorrect');
-                exit;
-            }
+            header('Location: user_settings.php?success=1&message=Votre compte a bien été mis à jour.');
+            exit;
+                
         }else{
             header('Location: user_settings.php?error=1&message=Le pseudonyme est déjà utilisé.');
             exit;

@@ -6,7 +6,7 @@
     require_once 'include/database.php';
 
     // Redirection si l'utilisateur n'est pas connecté
-    checkConnect('connexion');
+    checkConnect('system/deconnexion','connexion');
 
     // Récupère les données de tout les acteurs
     $reqActeur = $db->prepare('SELECT * FROM acteur');
