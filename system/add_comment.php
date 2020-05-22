@@ -48,7 +48,7 @@
             <form action="" method='POST'>
                 <div>
                     <label for="comment">Commentaire <span class="required">*</span> :</label>
-                    <textarea name="comment" required cols="30" rows="10" placeholder="Votre commentaire"></textarea>
+                    <textarea name="comment" id="comment" required cols="30" rows="10" placeholder="Votre commentaire"></textarea>
                 </div>
                 <button type="submit">ENVOYER</button>
                 <a href="../acteur.php?id=<?= $id ?>" class="personal-link-acteur">Retour</a>

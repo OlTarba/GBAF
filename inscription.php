@@ -57,27 +57,27 @@
             <form action="" method="POST">
                 <div>
                     <label for="nom">Nom <span class="required">*</span>  : </label>
-                    <input type="text" required name="nom">
+                    <input type="text" required id="nom" name="nom">
                 </div>
                 <div>
                     <label for="prenom">Prénom <span class="required">*</span>  : </label>
-                    <input type="text" required name="prenom">
+                    <input type="text" required id="prenom" name="prenom">
                 </div>
                 <div>
                     <label for="pseudo">Pseudonyme <span class="required">*</span>  : </label>
-                    <input type="text" required name="pseudo">
+                    <input type="text" required id="pseudo" name="pseudo">
                 </div>
                 <div>
                     <label for="password">Mot de passe <span class="required">*</span>  : </label>
-                    <input type="password" required name="password">
+                    <input type="password" required id="password" name="password">
                 </div>
                 <div>
                     <label for="question">Question secrête <span class="required">*</span>  : </label>
-                    <input type="text" required name="question">
+                    <input type="text" required id="question" name="question">
                 </div>
                 <div>
                     <label for="reponse">Réponse secrête <span class="required">*</span>  : </label>
-                    <input type="text" required name="reponse">
+                    <input type="text" required id="reponse" name="reponse">
                 </div>
                 <button type="submit">VALIDER</button>
             </form>

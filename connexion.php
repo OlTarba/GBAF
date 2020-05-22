@@ -55,11 +55,11 @@
             <form action="" method="POST">
                 <div>
                     <label for="pseudo">Pseudonyme : </label>
-                    <input type="text" required name="pseudo">
+                    <input type="text" id="pseudo" required name="pseudo">
                 </div>
                 <div>
                     <label for="password">Mot de passe : </label>
-                    <input type="password" required name="password">
+                    <input type="password" id="password" required name="password">
                 </div>
 
                 <button type="submit">CONNEXION</button>
