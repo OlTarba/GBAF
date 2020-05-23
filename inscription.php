@@ -54,7 +54,7 @@
         <!-- Formulaire d'inscription -->
         <div class="card-form form">
             <h3>Inscription</h3>
-            <form action="" method="POST">
+            <form method="POST">
                 <div>
                     <label for="nom">Nom <span class="required">*</span>  : </label>
                     <input type="text" required id="nom" name="nom">

@@ -52,7 +52,7 @@
         <!-- Formulaire de connexion -->
         <div class="card-form form">
             <h3>Connexion</h3>
-            <form action="" method="POST">
+            <form method="POST">
                 <div>
                     <label for="pseudo">Pseudonyme : </label>
                     <input type="text" id="pseudo" required name="pseudo">

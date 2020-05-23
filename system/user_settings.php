@@ -99,7 +99,7 @@
 
         <div class="card-form form">
             <h3>Paramètre de compte</h3>
-            <form action="" method="POST">
+            <form method="POST">
                 <div>
                     <label for="nom">Nom : </label>
                     <input type="text" required name="nom" id="nom" value="<?= $user['nom'] ?>">

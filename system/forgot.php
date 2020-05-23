@@ -89,7 +89,7 @@
         <?php } else if(isset($_GET['question'])){  ?>
             <div class="card-form form">
                 <h3>Modifier votre mot de passe</h3>
-                <form action="" method="POST">
+                <form method="POST">
                     <div>
                         <label for="question">Question secrète :</label>
                         <span class="question" id="question"><?= $user['question'] ?></span>

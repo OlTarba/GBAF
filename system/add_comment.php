@@ -45,7 +45,7 @@
 
         <div class="card-form form add-comment">
             <h3><?= $acteur['acteur'] ?></h3>
-            <form action="" method='POST'>
+            <form method='POST'>
                 <div>
                     <label for="comment">Commentaire <span class="required">*</span> :</label>
                     <textarea name="comment" id="comment" required cols="30" rows="10" placeholder="Votre commentaire"></textarea>
