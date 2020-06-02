@@ -20,6 +20,16 @@ textarea{
     max-width:80%;
     min-width:80%;
 }
+::-webkit-scrollbar{
+    width:10px;
+}
+::-webkit-scrollbar-thumb{
+    background: linear-gradient(to top, #fe4f4f, #fa3131, #fe0000);
+    border-radius:3px;
+}
+::-webkit-scrollbar-thumb:hover{
+    background: linear-gradient(to top, #ca4b4b, #bd2525, #c40101);
+}
 /* HEADER */ 
 header{
     border-bottom: 2px solid #FF0000;
@@ -28,6 +38,7 @@ header{
     align-items:center;
 }
 header .container-logo a{
+    position:relative;
     transition: opacity 0.3s;
 }
 header .container-logo a:hover{
@@ -36,6 +47,22 @@ header .container-logo a:hover{
 header .logo{
     width: 75px;
     margin-left: 150px;
+}
+header .container-logo a::after{
+    content: 'Accueil';
+    color:#333;
+    position:absolute;
+    top:-50%;
+    text-transform:uppercase;
+    left:80%;
+    font-weight:500;
+    letter-spacing: 1px;
+    opacity:0;
+    transition: .3s;
+}
+header .container-logo a:hover::after{
+    left:110%;
+    opacity:1;
 }
 .gbaf-title{
     font-weight: 100;
@@ -421,6 +448,9 @@ footer{
     }
     header .logo{
         width:60px;
+    }
+    header .container-logo a::after{
+        font-size: 11px; 
     }
     /* FORMULAIRE */ 
     .card-form{
